@@ -94,7 +94,21 @@
 				
 		### 云存储 
 			composer require "overtrue/laravel-filesystem-qiniu"
-
+		
+		## Redis Session 2号数据库
+			@see https://learnku.com/laravel/t/2466/laravel-configuration-under-the-redis-so-that-the-cache-session-each-use-a-different-redis-database
+			.env
+				SESSION_DRIVER=redis
+				SESSION_CONNECTION=session
+				SESSION_LIFETIME=43200
+			vi config/database.php
+				'session' => [
+		            'host' => env('REDIS_HOST', '127.0.0.1'),
+		            'password' => env('REDIS_PASSWORD', null),
+		            'port' => env('REDIS_PORT', 6379),
+		            'database' => env('REDIS_CACHE_DB', 2),
+		        ],
+			
 		### Redis broadcaster
 			.env
 				BROADCAST_DRIVER=log => BROADCAST_DRIVER=redis
@@ -127,19 +141,19 @@
 		composer require  predis/predis
 		composer require  laravel/horizon
 		
-			php artisan queue:table //要不要这个呢？
-			php artisan queue:failed_jobs // failed_jobs table
+			// php artisan queue:table //要不要这个呢？不要了！
+			php artisan queue:failed-table // failed_jobs table
 			php artisan migrate
 		@see https://segmentfault.com/a/1190000015097364
 		@url https://www.cnblogs.com/love-snow/articles/7778532.html
 			本地调试的时候要使用 php artisan queue:listen 不用 php artisan queue:work
 			在开发环境我们想测试的时候，可以把 Queue driver 设置成为 sync，这样队列就变成了同步执行，方便调试队列里面的任务。
 			队列任务最大运行时长（秒）可以通过 Artisan 命令上的 --timeout 开关来指定：
-
 				php artisan queue:work --timeout=30
 					implements ShouldQueue
 						public $timeout = 120;
-	### Horizon
+	### Horizon 
+		@url https://laravel.com/docs/6.x/horizon
 		composer require  laravel/horizon
 			vi app/Providers/HorizonServiceProvider.php
 		php artisan horizon
