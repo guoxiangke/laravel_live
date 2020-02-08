@@ -5,6 +5,15 @@
 		3.直播间og即加入小组（直播间）
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
+# todo
+	- 配置队列redis + queue + horizon
+	- 多直播间功能
+	- 微信登录
+	- docker容器化部署
+		- socket需要暴露端口给前端Echo
+	- 集成m3u8 live播放器
+	## done
+
 # 安装laravel
 
 	```laravel new laravel6
@@ -50,8 +59,6 @@
 	## 并行下载插件
 		```composer global require "hirak/prestissimo"```
 
-		composer require  predis/predis 
-		composer require  laravel/horizon
 		composer require  laravel/socialite
 		composer require  mtvs/eloquent-hashids
 		composer require  simshaun/recurr
@@ -119,6 +126,27 @@
 	### Çonfig redis Queue / horizon work
 		composer require  predis/predis
 		composer require  laravel/horizon
+		
+			php artisan queue:table //要不要这个呢？
+			php artisan queue:failed_jobs // failed_jobs table
+			php artisan migrate
+		@see https://segmentfault.com/a/1190000015097364
+		@url https://www.cnblogs.com/love-snow/articles/7778532.html
+			本地调试的时候要使用 php artisan queue:listen 不用 php artisan queue:work
+			在开发环境我们想测试的时候，可以把 Queue driver 设置成为 sync，这样队列就变成了同步执行，方便调试队列里面的任务。
+			队列任务最大运行时长（秒）可以通过 Artisan 命令上的 --timeout 开关来指定：
+
+				php artisan queue:work --timeout=30
+					implements ShouldQueue
+						public $timeout = 120;
+	### Horizon
+		composer require  laravel/horizon
+			vi app/Providers/HorizonServiceProvider.php
+		php artisan horizon
+		php artisan horizon:pause
+		php artisan horizon:continue
+		php artisan horizon:status
+
 
 	### Installing Laravel Echo
 		npm install --save laravel-echo pusher-js vue-chat-scroll
