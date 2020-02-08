@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateRrulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('rrules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('avatar')->nullable();
+            // $table->date('start_at')->nullable();
+            // $table->date('end_at')->nullable();
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('end_at')->nullable();
+            $table->string('rrule_string');
             $table->schemalessAttributes('extra_attributes');
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('rrules');
     }
 }

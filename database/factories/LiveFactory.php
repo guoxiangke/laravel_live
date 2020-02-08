@@ -1,0 +1,22 @@
+<?php
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\User;
+use App\Models\Live;
+use App\Models\Rrule;
+use Faker\Generator as Faker;
+
+$factory->define(Live::class, function (Faker $faker) {
+    return [
+    	'title' => $faker->name,
+    	'description' => $faker->paragraph,
+        'user_id' => function () {
+            return factory(User::class)
+                ->create()->id;
+        },
+        'rrule_id' => function () {
+            return factory(Rrule::class)
+                ->create()->id;
+        },
+    ];
+});
