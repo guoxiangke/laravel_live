@@ -19,9 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 // broadcast(new App\Events\WebsocketDemoEvent('welcome data!'));
-Route::get('/chats', 'ChatsController@index');
+
 
 Route::resources(['live' => 'LiveController']);
-Route::get('/messages', 'MessageController@fetchMessages');
-Route::post('/messages', 'MessageController@sendMessage');
+Route::resources(['messages' => 'MessageController']);
+// Route::get('/messages/{id}', 'MessageController@fetchMessages');
+// Route::post('/messages', 'MessageController@sendMessage');
 

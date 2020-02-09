@@ -62,8 +62,10 @@ return [
             'driver' => 'redis',
             'connection' => 'default',
             'queue' => env('REDIS_QUEUE', 'default'),
+            // the job will be released back onto the queue if it has been processing for 90 seconds without being deleted. 
             'retry_after' => 90,
-            'block_for' => null,
+            // Adjusting this value based on your queue load can be more efficient than continually polling the Redis database for new jobs. For instance, you may set the value to 5 to indicate that the driver should block for five seconds while waiting for a job to become available:
+            'block_for' => 3,
         ],
 
     ],

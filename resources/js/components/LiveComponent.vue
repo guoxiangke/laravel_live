@@ -43,7 +43,7 @@
 
 <script>
     export default {
-        props:['user'],
+        props:['user', 'live'],
         data() {
             return {
                 messages: [],
@@ -51,11 +51,12 @@
                 users:[],
                 activeUser: false,
                 typingTimer: false,
+                room: 'live.' + this.live.id
             }
         },
         created() {
             this.fetchMessages();
-            Echo.join('chat')
+            Echo.join(this.room)
                 .here(user => {
                     this.users = user;
                 })
@@ -66,7 +67,7 @@
                     this.users = this.users.filter(u => u.id != user.id);
                 })
                 .listen('MessageSent', (event) => {
-                    console.log('MessageSent', event);
+                    console.log('event')
                     this.messages.push(event.message);
                 })
                 .listenForWhisper('typing', user => {
@@ -81,20 +82,21 @@
         },
         methods: {
             fetchMessages() {
-                axios.get('/messages').then(response => {
+                axios.get('/messages/'+this.live.id).then(response => {
                     this.messages = response.data;
                 })
             },
             sendMessage() {
                 this.messages.push({
                     user: this.user,
+                    live: this.live,
                     message: this.newMessage
                 });
-                axios.post('/messages', {message: this.newMessage});
+                axios.post('/messages', {message: this.newMessage, live: this.live.id});
                 this.newMessage = '';
             },
             sendTypingEvent() {
-                Echo.join('chat')
+                Echo.join(this.room)
                     .whisper('typing', this.user);
             }
         }

@@ -33,11 +33,9 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
      */
     protected function gate()
     {
+        // @url https://laravel.com/docs/6.x/horizon#dashboard-authorization
         Gate::define('viewHorizon', function ($user) {
             return $user->id === 1;
-            return in_array($user->email, [
-                //
-            ]);
         });
     }
 }

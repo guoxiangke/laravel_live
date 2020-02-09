@@ -1985,21 +1985,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user'],
+  props: ['user', 'live'],
   data: function data() {
     return {
       messages: [],
       newMessage: '',
       users: [],
       activeUser: false,
-      typingTimer: false
+      typingTimer: false,
+      room: 'live.' + this.live.id
     };
   },
   created: function created() {
     var _this = this;
 
     this.fetchMessages();
-    Echo.join('chat').here(function (user) {
+    Echo.join(this.room).here(function (user) {
       _this.users = user;
     }).joining(function (user) {
       _this.users.push(user);
@@ -2008,7 +2009,7 @@ __webpack_require__.r(__webpack_exports__);
         return u.id != user.id;
       });
     }).listen('MessageSent', function (event) {
-      console.log('MessageSent', event);
+      console.log('event');
 
       _this.messages.push(event.message);
     }).listenForWhisper('typing', function (user) {
@@ -2027,22 +2028,24 @@ __webpack_require__.r(__webpack_exports__);
     fetchMessages: function fetchMessages() {
       var _this2 = this;
 
-      axios.get('/messages').then(function (response) {
+      axios.get('/messages/' + this.live.id).then(function (response) {
         _this2.messages = response.data;
       });
     },
     sendMessage: function sendMessage() {
       this.messages.push({
         user: this.user,
+        live: this.live,
         message: this.newMessage
       });
       axios.post('/messages', {
-        message: this.newMessage
+        message: this.newMessage,
+        live: this.live.id
       });
       this.newMessage = '';
     },
     sendTypingEvent: function sendTypingEvent() {
-      Echo.join('chat').whisper('typing', this.user);
+      Echo.join(this.room).whisper('typing', this.user);
     }
   }
 });

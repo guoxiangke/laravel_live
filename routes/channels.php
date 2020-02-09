@@ -16,11 +16,20 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 
+// todo 是否有权限加入该聊天室！
 Broadcast::channel('live.{liveId}', function ($user, $liveId) {
-	//todo 是否加入了该聊天室！
+	// if ($user->canJoinRoom($roomId)) {
+    // return ['id' => $user->id, 'name' => $user->name];
+    // }
 	return $user;
-    // return $user->id === Live::findOrNew($orderId)->user_id;
 });
+
+Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+    if ($user->canJoinRoom($roomId)) {
+        return ['id' => $user->id, 'name' => $user->name];
+    }
+});
+
 
 Broadcast::channel('chat', function ($user) {
     return $user;

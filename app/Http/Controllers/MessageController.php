@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\Live;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 
@@ -48,7 +49,7 @@ class MessageController extends Controller
     {
         $message = auth()->user()->messages()->create([
             'message' => $request->message,
-            'live_id' => 1, //todo
+            'live_id' => $request->live, //todo
         ]);
 
         broadcast(new MessageSent($message->load('user')))->toOthers();
@@ -56,15 +57,18 @@ class MessageController extends Controller
         return ['status' => 'success'];
     }
 
+
     /**
      * Display the specified resource.
-     *
+     * changTo fetchMessages: show message in a roomId
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show(int $liveId)
     {
-        //
+        $messages =  Message::with('user')->where('live_id', $liveId)->get();
+        
+        return response()->json($messages);
     }
 
     /**
@@ -99,25 +103,5 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         //
-    }
-
-    //@see index
-    public function fetchMessages(Request $request)
-    {
-        //todo with live 1
-        $messages =  Message::with('user')->where('live_id', 1)->get();
-        return response()->json($messages);
-    }
-    //@see store
-    public function sendMessage(Request $request)
-    {
-        $message = auth()->user()->messages()->create([
-            'message' => $request->message,
-            'live_id' => 1, //todo
-        ]);
-        // broadcast(new App\Events\WebsocketDemoEvent('welcome data!'));
-        broadcast(new MessageSent($message->load('user')))->toOthers();
-
-        return ['status' => 'success'];
     }
 }

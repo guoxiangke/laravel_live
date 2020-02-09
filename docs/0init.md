@@ -6,13 +6,14 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
-	- 配置队列redis + queue + horizon
-	- 多直播间功能
 	- 微信登录
 	- docker容器化部署
 		- socket需要暴露端口给前端Echo
 	- 集成m3u8 live播放器
+	- 头像，昵称，在线人数
 	## done
+		- 配置队列redis + queue + horizon
+		- 多直播间功能
 
 # 安装laravel
 
@@ -137,7 +138,9 @@
 		Dashboard
 			http://127.0.0.1:8000/admin/websockets
 
-	### Çonfig redis Queue / horizon work
+	### Çonfig redis Queue
+		https://tn710617.github.io/zh-tw/laravelDiggingDeeperQueues/
+		https://www.kancloud.cn/php-jdxia/laravel5note/490404
 		composer require  predis/predis
 		composer require  laravel/horizon
 		
@@ -161,9 +164,30 @@
 		php artisan horizon:continue
 		php artisan horizon:status
 
+		'queue' => ['high','default','low'],
+		// When the balance option is set to false, the default Laravel behavior will be used, which processes queues in the order they are listed in your configuration.
+		'balance' => 'false', 
+			// simple evenly平均分配进程
+			// auto 哪个队列任务多，多分配进程
+				//'minProcesses' => 1, //scale up
+				//'maxProcesses' => 10, //scale down to
+			// false 按照config/queues.php中的配置顺序分配进程
+				'queue' => env('REDIS_QUEUE', 'default'),
+		'processes' => 3,
 
+		If you want to broadcast your event using the sync queue instead of the default queue driver, you can implement the ShouldBroadcastNow interface instead of ShouldBroadcast:
+
+		// Allow Broadcasting a notification now instead on queue!
+			https://github.com/laravel/framework/pull/16867
+			https://medium.com/@panjeh/laravel-config-horizon-queue-balance-processes-priority-in-redis-c36dd4c16859
+
+	
 	### Installing Laravel Echo
 		npm install --save laravel-echo pusher-js vue-chat-scroll
+	### PrivateChannels 与 PresenceChannels的不同
+		https://laravel.com/docs/5.8/broadcasting#presence-channels
+		https://pusher.com/docs/channels/using_channels/presence-channels
+		相同点：while PrivateChannels and PresenceChannels represent private channels that require channel authorization:
 ## xx 
 
 
