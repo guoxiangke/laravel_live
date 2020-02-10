@@ -30,5 +30,10 @@ class Profile extends Model implements HasMedia
         'extra_attributes' => 'array',
     ];
 
+        // 'avatar',
 
+
+    public function user(){
+        return $this->belongsTo(User::Class);
+    }
 }

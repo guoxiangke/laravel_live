@@ -17,6 +17,7 @@
         "overtrue/laravel-filesystem-qiniu": "^1.0",
         "predis/predis": "^1.1",
         "simshaun/recurr": "^4.0",
+        "socialiteproviders/weixin": "^4.0",
         "spatie/laravel-activitylog": "^3.9",
         "spatie/laravel-medialibrary": "^7.18",
         "spatie/laravel-permission": "^3.6",

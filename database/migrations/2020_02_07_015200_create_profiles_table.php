@@ -24,6 +24,7 @@ class CreateProfilesTable extends Migration
             //country. see telephone with(+)86
             $table->string('telephone', 22)->unique()->index(); //用来登陆账户9-13 with(+)86
             $table->unsignedBigInteger('recommend_uid')->nullable()->comment('用户关系');
+            $table->string('avatar')->nullable();
             $table->schemalessAttributes('extra_attributes')->comment('扩展属性');
             $table->timestamps();
             $table->softDeletes();

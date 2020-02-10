@@ -6,7 +6,6 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
-	- 微信登录
 	- docker容器化部署
 		- socket需要暴露端口给前端Echo
 	- 集成m3u8 live播放器
@@ -14,6 +13,7 @@
 	## done
 		- 配置队列redis + queue + horizon
 		- 多直播间功能
+		- 微信登录	
 
 # 安装laravel
 
@@ -188,8 +188,21 @@
 		https://laravel.com/docs/5.8/broadcasting#presence-channels
 		https://pusher.com/docs/channels/using_channels/presence-channels
 		相同点：while PrivateChannels and PresenceChannels represent private channels that require channel authorization:
-## xx 
 
+## 微信登录
+	composer require socialiteproviders/weixin
+	// 注意网站实现微信登录需要的依赖包为socialiteproviders/weixin-web，如果是手机端App那么可以用socialiteproviders/weixin。
+	vi Providers/RouteServiceProvide.php
+	https://socialiteproviders.netlify.com/providers/weixin.html#_3-event-listener
+		vi app/Providers/EventServiceProvider
+	vi config/services.php
+	    'weixin' => [
+	        'client_id' => env('WEIXIN_KEY'),
+	        'client_secret' => env('WEIXIN_SECRET'),
+	        'redirect' => env('APP_URL', 'https://abc.dev') . env('WEIXIN_REDIRECT_URI'),
+	        // 这一行配置非常重要，必须要写成这个地址。
+	        'auth_base_uri' => 'https://open.weixin.qq.com/connect/qrconnect',
+	    ],
 
 
 

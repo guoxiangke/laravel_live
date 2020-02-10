@@ -26,3 +26,12 @@ Route::resources(['messages' => 'MessageController']);
 // Route::get('/messages/{id}', 'MessageController@fetchMessages');
 // Route::post('/messages', 'MessageController@sendMessage');
 
+//微信社交认证登陆路由
+$wechatVerifyCode = env('WEIXIN_VERIFY_CODE', 'Need config WEIXIN_VERIFY_CODE to Verify!');
+Route::get('/MP_verify_'.$wechatVerifyCode.'.txt', function () {
+    return $wechatVerifyCode;
+});
+Route::resources(['socials' => 'SocialController']);
+Route::get('login/wechat/callback', 'Auth\LoginSocialController@handleWechatProviderCallback')->name('login.weixin.callback');
+Route::get('login/wechat', 'Auth\LoginSocialController@redirectToWechatProvider')->name('login.weixin');
+
