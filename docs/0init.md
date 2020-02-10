@@ -245,4 +245,10 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### Uncaught You must pass your app key when you instantiate Pusher.
 		https://github.com/laravel/echo/issues/20 Echo won´t initiate Pusher
 	### docker volume rm laravel_live_code
+
+	### npm run prod bug:
+		"sass-loader": "^8.0.2",
+		npm update -D
+		https://laracasts.com/discuss/channels/elixir/npm-run-prod-fails-with-bootstrap?page=1
+
 		
