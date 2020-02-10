@@ -9,7 +9,6 @@ if [ "$role" = "app" ]; then
     echo "Caching configuration..."
     ( cd /var/www/html && \
     php artisan config:clear \
-      && php composer dump-autoload \
       && php artisan clear-compiled \
       && php artisan route:clear \
       && php artisan view:clear \

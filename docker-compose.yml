@@ -118,6 +118,7 @@ services:
       - redis
     networks:
       - backend
+      - overlay
     volumes:
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
