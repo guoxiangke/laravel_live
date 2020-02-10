@@ -6,11 +6,11 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
-	- docker容器化部署
-		- socket需要暴露端口给前端Echo
 	- 集成m3u8 live播放器
 	- 头像，昵称，在线人数
 	## done
+		- docker容器化部署
+			- socket需要暴露端口给前端Echo
 		- 配置队列redis + queue + horizon
 		- 多直播间功能
 		- 微信登录	
