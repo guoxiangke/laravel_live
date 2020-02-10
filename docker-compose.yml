@@ -23,8 +23,7 @@ services:
       - .env:/var/www/html/.env
       - ./docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./storage/app:/var/www/html/storage/app
-    networks:
-      - backend
+    network_mode: "bridge"
 
   # Nginx Service
   nginx:
@@ -40,9 +39,7 @@ services:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${MAIL_USERNAME}
-    networks:
-      - overlay
-      - backend
+    network_mode: "bridge"
     links:
       - app
 
@@ -57,14 +54,12 @@ services:
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: root
-    networks:
-      - backend
+    network_mode: "bridge"
 
   redis:
     image: redis:latest
     restart: always
-    networks:
-      - backend
+    network_mode: "bridge"
 
   scheduler:
     image: guoxiangke/live
@@ -74,8 +69,7 @@ services:
     links:
       - db:mysql
       - redis
-    networks:
-      - backend
+    network_mode: "bridge"
     volumes:
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
@@ -94,8 +88,7 @@ services:
     links:
       - db:mysql
       - redis
-    networks:
-      - backend
+    network_mode: "bridge"
     volumes:
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
@@ -116,9 +109,7 @@ services:
     links:
       - db:mysql
       - redis
-    networks:
-      - backend
-      - overlay
+    network_mode: "bridge"
     volumes:
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
@@ -129,11 +120,7 @@ services:
       SESSION_DRIVER: redis
       QUEUE_DRIVER: redis
       REDIS_HOST: redis
-#Docker Networks
-networks:
-  overlay:
-    driver: bridge
-  backend:
+
 volumes:
   db_data:
   code:

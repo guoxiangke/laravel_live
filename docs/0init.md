@@ -239,3 +239,6 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 		live 改为 chats或
 		Route::resource('lives', 'LiveController'); =》改为
 		Route::resource('live', 'LiveController');
+	### https css (blocked:mixed-content)
+		vi Provider/AppServiceProvider.php
+			URL::forceScheme('https');
