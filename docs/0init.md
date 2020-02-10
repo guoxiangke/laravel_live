@@ -244,4 +244,5 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 			URL::forceScheme('https');
 	### Uncaught You must pass your app key when you instantiate Pusher.
 		https://github.com/laravel/echo/issues/20 Echo won´t initiate Pusher
+	### docker volume rm laravel_live_code
 		
