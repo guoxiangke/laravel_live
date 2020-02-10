@@ -38,8 +38,9 @@ window.Echo = new Echo({
     key: 'anyKey',
     // key: process.env.MIX_PUSHER_APP_KEY,
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    // encrypted: true
+    encrypted: false,
     wsHost: window.location.hostname,
     wsPort: 6001,
     disableStats: true,
+    enabledTransports: ['ws', 'wss'], // <-- only use ws and wss as valid transports
 });
