@@ -250,5 +250,17 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 		"sass-loader": "^8.0.2",
 		npm update -D
 		https://laracasts.com/discuss/channels/elixir/npm-run-prod-fails-with-bootstrap?page=1
+	### Environment variables in Laravel Mix undefined
+		https://laravel.com/docs/master/mix#environment-variables
+		https://laracasts.com/discuss/channels/laravel/environment-variables-in-laravel-mix-undefined
+	
+	### 劝我放弃 laravel-websockets
+		https://www.reddit.com/r/laravel/comments/eml0sd/issue_with_laravelwebsockets_package_over_ssl/
 
+	### wss bug
+		https://www.reddit.com/r/laravel/comments/eml0sd/issue_with_laravelwebsockets_package_over_ssl/
+	
+	### valet 每次必须https？用test不用dev和app
+		valet domain test
+		https://stackoverflow.com/questions/37135711/laravel-valet-not-working
 		

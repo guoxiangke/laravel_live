@@ -38,11 +38,10 @@ window.Echo = new Echo({
     key: 'anyKey',
     // key: process.env.MIX_PUSHER_APP_KEY,
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    encrypted: false,
-    // wsHost: window.location.hostname,
-    wsHost: '54.149.225.207', //!!! todo change!
-    wsPort: 6001,
-    // wssPort: 6001,
+    encrypted: true,
+    wsHost: window.location.hostname,// == process.env.MIX_WS_HOST,
+    wsPort: process.env.MIX_WS_PORT,
+    wssPort: process.env.MIX_WS_PORT,
     disableStats: true,
-    enabledTransports: ['ws'], // <-- only use ws and wss as valid transports
+    // enabledTransports: ['ws', 'wss'], // <-- only use ws and wss as valid transports
 });
