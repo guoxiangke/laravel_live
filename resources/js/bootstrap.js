@@ -39,9 +39,12 @@ window.Echo = new Echo({
     // key: process.env.MIX_PUSHER_APP_KEY,
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: true,
-    wsHost: window.location.hostname,// == process.env.MIX_WS_HOST,
+    //window.location.hostname,
+    wsHost: process.env.MIX_WS_HOST,
     wsPort: process.env.MIX_WS_PORT,
     wssPort: process.env.MIX_WS_PORT,
     disableStats: true,
-    // enabledTransports: ['ws', 'wss'], // <-- only use ws and wss as valid transports
+    // https://github.com/beyondcode/laravel-websockets/issues/102
+    // so it does not try to fallback to other methods Pusher.com does support.
+    enabledTransports: ['ws', 'wss'],
 });
