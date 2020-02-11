@@ -42,7 +42,7 @@ window.Echo = new Echo({
     // wsHost: window.location.hostname,
     wsHost: '54.149.225.207', //!!! todo change!
     wsPort: 6001,
-    wssPort: 6001,
+    // wssPort: 6001,
     disableStats: true,
-    enabledTransports: ['ws', 'wss'], // <-- only use ws and wss as valid transports
+    enabledTransports: ['ws'], // <-- only use ws and wss as valid transports
 });
