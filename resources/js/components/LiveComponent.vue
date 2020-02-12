@@ -333,5 +333,8 @@
     color: #fff;
     background-color: #1F8CEB;
   }
+  #myTabContent{
+    margin-bottom: 50px;
+  }
 
 </style>
