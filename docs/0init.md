@@ -234,6 +234,10 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### laravel Broadcaster config中的pusher和Pusher Channels的区别！ https://pusher.com/channels
 	### tinker中生成测试数据
 		factory(\App\Models\Message::class, 1)->create() # tinker必须要第一个\
+		\App\Models\Live::create(['title' => "test",'description' => "test description",'user_id' => 1,'rrule_id' => 1,]);
+		\App\User::create(['name'=>'admin','email'=>'admin@admin.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
+		\App\User::create(['name'=>'test','email'=>'test@test.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
+		
 	### 直播 model & Route::resource('lives', 'LiveController');  bug！
 		lives的单数 ==》life了！
 		live 改为 chats或
@@ -245,6 +249,7 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### Uncaught You must pass your app key when you instantiate Pusher.
 		https://github.com/laravel/echo/issues/20 Echo won´t initiate Pusher
 	### docker volume rm laravel_live_code
+		docker-compose down  && docker volume rm laravel_live_code && docker-compose up -d --build
 
 	### npm run prod bug:
 		"sass-loader": "^8.0.2",
@@ -263,4 +268,13 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### valet 每次必须https？用test不用dev和app
 		valet domain test
 		https://stackoverflow.com/questions/37135711/laravel-valet-not-working
+	### vue debug
+		Vue.config.devtools = true; => app.js
+	### vue 动态类判断,传递参数
+		v-bind:class="checkCodes(message.user_id)"
+		methods: {
+            checkCodes: function(user_id) {
+              return user_id == this.user.id?'yes':'no';
+            },
+        }
 		

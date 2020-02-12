@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.config.devtools = true;
 
 import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll);
