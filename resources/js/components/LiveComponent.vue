@@ -2,7 +2,7 @@
    <div class="row">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
-        <iframe :src="'https://lss.test/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.isLive" frameborder="0"></iframe>
+        <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.isLive" frameborder="0"></iframe>
       </div>
 
       <div class="col">
