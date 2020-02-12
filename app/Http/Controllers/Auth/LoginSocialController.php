@@ -70,7 +70,7 @@ class LoginSocialController extends Controller
                     'user_id'   => $user->id,
                     'type'      => $type,
                     'name'      => $name,
-                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
+                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar),
                 ]);
             }
             //执行登录！
