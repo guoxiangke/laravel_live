@@ -206,7 +206,7 @@
     overflow-y:scroll
   }
   .intercom-conversation-background{
-    background-image: url(https://live.yongbuzhixi.com/images/background-1@2x.aea5e218.png);
+    background-image: url(/image/background-1@2x.aea5e218.png);
     background-size: 417px 417px;
     background-repeat: repeat;
     position: absolute;
@@ -215,7 +215,7 @@
     left: 0;
     right: 0;
     background-color: #fff;
-    opacity: .8;
+    opacity: .5;
   }
   #intercom-textarea{
     width: 100%;
@@ -242,7 +242,7 @@
     cursor: text;
   }
   .intercom-composer-send-button {
-    background-image: url(https://live.yongbuzhixi.com/images/mobile-send@2x.5a60f4ee.png);
+    background-image: url(/image/mobile-send@2x.5a60f4ee.png);
     background-size: 14px 14px;
     background-repeat: no-repeat;
     background-position: 11.5px;
