@@ -233,11 +233,11 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 ## 经验/bug
 	### laravel Broadcaster config中的pusher和Pusher Channels的区别！ https://pusher.com/channels
 	### tinker中生成测试数据
-		factory(\App\Models\Message::class, 1)->create() # tinker必须要第一个\
-		\App\Models\Live::create(['title' => "test",'description' => "test description",'user_id' => 1,'rrule_id' => 1,]);
+		factory(\App\Models\Message::class, 1)->create() # tinker必须要第一个
+		\App\Models\Live::create(['title' => "测试live",'description' => "Hello，直播聊天时，这里可以是一个图文结束，todo：开始时间/结束时间",'user_id' => 1,'rrule_id' => 1,]);
 		\App\User::create(['name'=>'admin','email'=>'admin@admin.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
 		\App\User::create(['name'=>'test','email'=>'test@test.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
-		
+		update users set password="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
 	### 直播 model & Route::resource('lives', 'LiveController');  bug！
 		lives的单数 ==》life了！
 		live 改为 chats或
@@ -278,3 +278,4 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
             },
         }
 	### 由于业务需要，重新切换公众号出现，redirect_uri域名与后台配置不一致，错误码10003
+	### https://kmoskwiak.github.io/videojs-resolution-switcher/ on hls

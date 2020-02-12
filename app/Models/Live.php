@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -32,5 +33,15 @@ class Live extends Model
 
 	public function user(){
     	return $this->belongsTo(User::Class);
+    }
+
+    public function rrule()
+    {
+        return $this->hasOne(Rrule::class);
+    }
+
+    public function getIsLiveAttribute()
+    {
+        return 0; //1 is live. todo check with rrule!
     }
 }

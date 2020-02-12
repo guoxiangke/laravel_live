@@ -2,16 +2,16 @@
    <div class="row">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
-        <iframe src="https://livelss.bj.bcebos.com/qn.html?stream=classroom&vid=202002&preset=L3" frameborder="0"></iframe>
+        <iframe :src="'https://lss.test/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.isLive" frameborder="0"></iframe>
       </div>
 
       <div class="col">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">消息</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">在线消息</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">信息</a>
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">图文介绍</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">在线用户</a>
@@ -165,6 +165,11 @@
   }
   .video{
     width: 100%;
+    height: 170px;
+    z-index: 999;
+  }
+  .video iframe{
+    height: 160px;
   }
   ::-webkit-scrollbar {
       width: 12px;

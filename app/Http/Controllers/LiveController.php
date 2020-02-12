@@ -58,6 +58,7 @@ class LiveController extends Controller
     public function show(Live $live)
     {
         $user = Auth::user()->load('socials');
+        $live->isLive = $live->is_live;
         return view('lives.show', ['live' => $live, 'user'=>$user]);
     }
 

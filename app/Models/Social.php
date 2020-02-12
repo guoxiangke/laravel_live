@@ -35,7 +35,6 @@ class Social extends Model
         'avatar',
     ];
 
-
     public function user(){
     	return $this->belongsTo(User::Class);
     }
