@@ -2,7 +2,7 @@
    <div class="row">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
-        <iframe src="https://livelss.bj.bcebos.com/qn.html?stream=classroom&vid=2020&preset=L3" frameborder="0"></iframe>
+        <iframe src="https://livelss.bj.bcebos.com/qn.html?stream=classroom&vid=202002&preset=L3" frameborder="0"></iframe>
       </div>
 
       <div class="col">
@@ -51,7 +51,7 @@
                         type="textarea"
                         name="message"
                         placeholder="发布消息..."></textarea>
-                    <button class="intercom-composer-send-button"></button>
+                    <button class="intercom-composer-send-button" @click="sendMessage"></button>
                   </div>
                 </div>
             </div>
@@ -132,6 +132,12 @@
                 })
             },
             sendMessage() {
+                this.newMessage = this.newMessage.replace(/(\r\n|\n|\r)/gm, "").trim();
+                if(this.newMessage.length == 0) {
+                  $('#intercom-textarea').focus();
+                  $('#intercom-textarea').attr('placeholder','请输入消息！');
+                  return;
+                }
                 this.messages.push({
                     user: this.user,
                     user_id: this.user.id,

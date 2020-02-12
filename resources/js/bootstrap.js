@@ -39,8 +39,8 @@ window.Echo = new Echo({
     // key: process.env.MIX_PUSHER_APP_KEY,
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     encrypted: true,
-    // wsHost: window.location.hostname,
-    wsHost: process.env.MIX_WS_HOST,
+    wsHost: window.location.hostname,
+    // wsHost: process.env.MIX_WS_HOST,
     wsPort: 6001, //process.env.MIX_WS_PORT,
     wssPort: 6001, //process.env.MIX_WS_PORT,
     disableStats: true,
@@ -48,9 +48,3 @@ window.Echo = new Echo({
     // so it does not try to fallback to other methods Pusher.com does support.
     enabledTransports: ['ws', 'wss'],
 });
-
-console.log(
-    process.env.MIX_WS_HOST,
-    process.env.MIX_WS_PORT,
-    process.env.MIX_PUSHER_SCHEME,
-    );
