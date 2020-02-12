@@ -21,7 +21,7 @@ class LoginSocialController extends Controller
     {
         $socialUser = Socialite::driver('weixin')->user();
 
-        return $this->bind($socialUser, Social::TYPE_WECHAT);
+        return $this->bindOrlogin($socialUser, Social::TYPE_WECHAT);
     }
 
     // 如果绑定过，取出userID, 自动登录，否则 执行绑定过程
