@@ -65,7 +65,7 @@ class LoginSocialController extends Controller
                     'password' => $password,
                     'remember_token' => $token,
                 ]);
-                Social::create([
+                $social = Social::create([
                     'social_id' => $socialId,
                     'user_id'   => $user->id,
                     'type'      => $type,
