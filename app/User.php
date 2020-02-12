@@ -12,6 +12,7 @@ use App\Traits\HasSchemalessAttributes;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 use App\Models\Message;
+use App\Models\Social;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function socials()
+    {
+        return $this->hasMany(Social::class);
+    }
+
 
 
 }

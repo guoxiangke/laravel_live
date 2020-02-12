@@ -28,7 +28,7 @@
                       <div class="intercom-comment-container" >
                         <div class="intercom-comment-container-admin-avatar">
                           <div class="intercom-avatar">
-                            <img src="http://wx.qlogo.cn/mmopen/50HcP4UOeLWI7mH6BLL0RQNBBJNclX738qVZ1b9CIRGK8eBKzV5RghHRq2vWekUt6EiaPLq9lSlHibWLEmt7nLl2tIZS4iabwtN/0">
+                            <img :src="message.user.socials[0]?message.user.socials[0].avatar:'/image/default.avatar.png'" alt="">
                           </div>
                         </div>
                         <div class="intercom-comment">
@@ -37,7 +37,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="intercom-conversation-part-metadata">{{ message.user.name }}</div>
+                      <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }}</div>
                   </div>
                 </div>
                   

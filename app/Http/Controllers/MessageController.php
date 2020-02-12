@@ -26,7 +26,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return Message::with('user')->where('live_id', 1)->get();
+        return Message::with('user','user.social')->where('live_id', 1)->get();
     }
 
     /**
@@ -66,7 +66,7 @@ class MessageController extends Controller
      */
     public function show(int $liveId)
     {
-        $messages =  Message::with('user')->where('live_id', $liveId)->get();
+        $messages =  Message::with('user', 'user.socials')->where('live_id', $liveId)->get();
         
         return response()->json($messages);
     }
