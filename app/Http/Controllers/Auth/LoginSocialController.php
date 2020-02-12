@@ -47,7 +47,7 @@ class LoginSocialController extends Controller
             if($social){ //已绑定，并定期更新头像
                 if($social->updated_at->diffInDays(now()) > 1) {
                     // $social->name = $name;
-                    $social->avatar = $socialUser->avatar;
+                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
                     if($social->isDirty()){
                         $social->save();
                     }
@@ -70,7 +70,7 @@ class LoginSocialController extends Controller
                     'user_id'   => $user->id,
                     'type'      => $type,
                     'name'      => $name,
-                    'avatar'      => $socialUser->avatar,
+                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
                 ]);
             }
             //执行登录！
