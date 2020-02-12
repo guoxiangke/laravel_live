@@ -69,7 +69,6 @@ class LoginSocialController extends Controller
                     'social_id' => $socialId,
                     'user_id'   => $user->id,
                     'type'      => $type,
-                    'sex'       => $socialUser->user->sex==1?1:0,
                     'name'      => $name,
                     'avatar'      => $socialUser->avatar,
                 ]);
