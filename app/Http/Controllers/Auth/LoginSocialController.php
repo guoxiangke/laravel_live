@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Socialite;
+use App\User;
 use App\Models\Social;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
