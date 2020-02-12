@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Live;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LiveController extends Controller
 {
@@ -56,7 +57,8 @@ class LiveController extends Controller
      */
     public function show(Live $live)
     {
-        return view('lives.show', ['live' => $live]);
+        $user = Auth::user()->load('socials');
+        return view('lives.show', ['live' => $live, 'user'=>$user]);
     }
 
     /**
