@@ -52,7 +52,7 @@ class MessageController extends Controller
             'live_id' => $request->live, //todo
         ]);
 
-        broadcast(new MessageSent($message->load('user')))->toOthers();
+        broadcast(new MessageSent($message->load('user', 'user.socials')))->toOthers();
 
         return ['status' => 'success'];
     }
