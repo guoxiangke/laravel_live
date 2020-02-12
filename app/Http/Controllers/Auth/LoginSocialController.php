@@ -27,23 +27,15 @@ class LoginSocialController extends Controller
     // 如果绑定过，取出userID, 自动登录，否则 执行绑定过程
     public function bindOrlogin($socialUser, $type)
     {
-        \Log::error(__CLASS__, [__FUNCTION__, $type, $socialUser]);
         $loginedId = Auth::id();
         $social = Social::where('social_id', $socialUser->id)->first();
-        //用户未登录，已绑定，执行自动登录, 并定期更新资料
-        if(!$loginedId && $social) {
-            $user = Auth::loginUsingId($social->user_id, true);//自动登入！
-            // todo update social profile!!
-            if($social->updated_at->diffInDays(now()) > 1) {
-                $social->name = $socialUser->nickname ?: $socialUser->name;
-                $social->avatar = $socialUser->avatar;
-                if($social->isDirty()){
-                    $social->save();
-                }
-            }
-        }
-        // 已登录且未绑定，执行绑定
-        if($loginedId && !$social) {
+        // \Log::error(__CLASS__, [__FUNCTION__, $social]);
+        // \Log::error(__CLASS__, [__FUNCTION__, $type, $loginedId]);
+        // \Log::error(__CLASS__, [__FUNCTION__, $socialUser]);
+
+
+        if($loginedId){
+            //用户已登录，执行绑定！
             Social::firstOrCreate([
                 'social_id' => $socialUser->id,
                 'user_id'   => $loginedId,
@@ -51,6 +43,32 @@ class LoginSocialController extends Controller
                 'name'      => $socialUser->nickname ?: $socialUser->name,
                 'avatar'      => $socialUser->avatar,
             ]);
+        }else{ //未登录，执行登录！
+            if($social){ //已绑定，并定期更新资料
+                if($social->updated_at->diffInDays(now()) > 1) {
+                    $social->name = $socialUser->nickname ?: $socialUser->name;
+                    $social->avatar = $socialUser->avatar;
+                    if($social->isDirty()){
+                        $social->save();
+                    }
+                }
+            }else { //微信首次授权登录
+                $name = $socialUser->nickname ?: $socialUser->name;
+                $email = $name.'@wx.com';
+                $user = User::create([
+                    'name' => $name,
+                    'email' => $email,
+                ]);
+                Social::create([
+                    'social_id' => $socialUser->id,
+                    'user_id'   => $user->id,
+                    'type'      => $type,
+                    'name'      => $name,
+                    'avatar'      => $socialUser->avatar,
+                ]);
+            }
+            //执行登录！
+            $user = Auth::loginUsingId($social->user_id, true);//自动登入！
         }
         return redirect('home');
     }
