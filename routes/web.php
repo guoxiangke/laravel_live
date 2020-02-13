@@ -38,3 +38,5 @@ Route::get('login/wechat/callback', 'Auth\LoginSocialController@handleWechatProv
 // 自动登录跳转 https://laracasts.com/discuss/channels/laravel/custom-login-page-redirection-from-middleware
 Route::get('login/wechat', 'Auth\LoginSocialController@redirectToWechatProvider')//->name('login.weixin');
 	->name('login');
+Route::get('login', 'Auth\LoginController@showLoginForm')
+	->name('login.default');
