@@ -279,3 +279,8 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
         }
 	### 由于业务需要，重新切换公众号出现，redirect_uri域名与后台配置不一致，错误码10003
 	### https://kmoskwiak.github.io/videojs-resolution-switcher/ on hls
+	### video.js
+		https://docs.videojs.com/tutorial-setup.html
+	### 如何禁止h5页面播放视频时自动全屏？
+		https://segmentfault.com/a/1190000012689604
+			https://x5.tencent.com/tbs/guide/video.html
