@@ -2,7 +2,9 @@
    <div class="row">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
+        <span class="statics">在线人数：<strong>{{ users.length }}</strong></span>
         <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.isLive" frameborder="0"></iframe>
+        <span class="statics">浏览次数：<strong>{{ viewed }}</strong></span>
       </div>
 
       <div class="col">
@@ -84,7 +86,7 @@
 
 <script>
     export default {
-        props:['user', 'live'],
+        props:['user', 'live', 'viewed'],
         data() {
             return {
                 messages: [],
@@ -92,7 +94,7 @@
                 users:[],
                 activeUser: false,
                 typingTimer: false,
-                room: 'live.' + this.live.id
+                room: 'live.' + this.live.id,
             }
         },
         computed: {
@@ -335,6 +337,10 @@
   }
   #myTabContent{
     margin-bottom: 50px;
+  }
+  .statics{
+    color: gray;
+    font-size: 12px;
   }
 
 </style>

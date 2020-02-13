@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Live;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class LiveController extends Controller
 {
@@ -59,7 +60,12 @@ class LiveController extends Controller
     {
         $user = Auth::user()->load('socials');
         $live->isLive = $live->is_live;
-        return view('lives.show', ['live' => $live, 'user'=>$user]);
+        activity()
+           ->causedBy($user)
+           ->performedOn($live)
+           ->log('viewed');
+        $viewed = Activity::forSubject($live)->where('description','viewed')->get()->count();
+        return view('lives.show', ['live' => $live, 'user'=>$user, 'viewed'=>$viewed]);
     }
 
     /**
