@@ -71,7 +71,7 @@ class LoginSocialController extends Controller
                     ]);
                 }
 
-                Social::firstOrCreate([
+                $social = Social::firstOrCreate([
                     'social_id' => $socialId,
                     'user_id'   => $user->id,
                     'type'      => $type,
@@ -80,7 +80,7 @@ class LoginSocialController extends Controller
                 ]);
             }
             //执行登录！
-            $user = Auth::loginUsingId($user->id, true);//自动登入！
+            $user = Auth::loginUsingId($social->user_id, true);//自动登入！
         }
         return Redirect::intended('home');
     }
