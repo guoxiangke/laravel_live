@@ -32,8 +32,6 @@ class LoginSocialController extends Controller
     public function bindOrlogin($socialUser, $type)
     {
         $loginedId = Auth::id();
-        // \Log::error(__CLASS__, [__FUNCTION__, $type, $loginedId]);
-        // \Log::error(__CLASS__, [__FUNCTION__, $socialUser]);
         $avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
         if($loginedId){
             //用户已登录，执行绑定！
@@ -80,7 +78,7 @@ class LoginSocialController extends Controller
                 ]);
             }
             //执行登录！
-            $user = Auth::loginUsingId($social->user_id, true);//自动登入！
+            Auth::loginUsingId($social->user_id, true);//自动登入！
         }
         return Redirect::intended('home');
     }

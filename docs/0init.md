@@ -284,3 +284,6 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### 如何禁止h5页面播放视频时自动全屏？
 		https://segmentfault.com/a/1190000012689604
 			https://x5.tencent.com/tbs/guide/video.html
+	### 登录后跳转之前页面
+		https://stackoverflow.com/questions/15389833/laravel-redirect-back-to-original-destination-after-login
+		return Redirect::intended('home')
