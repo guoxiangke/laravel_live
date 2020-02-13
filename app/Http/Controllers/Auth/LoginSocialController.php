@@ -68,7 +68,7 @@ class LoginSocialController extends Controller
                         'email_verified_at' => now(),
                         'password' => $password,
                         'remember_token' => $token,
-                    ])
+                    ]);
                 }
 
                 Social::firstOrCreate([
