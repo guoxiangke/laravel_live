@@ -2,9 +2,12 @@
    <div class="row">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
-        <span class="statics">在线人数：<strong>{{ users.length }}</strong></span>
-        <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.isLive" frameborder="0"></iframe>
-        <span class="statics">浏览次数：<strong>{{ viewed }}</strong></span>
+        <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.live" frameborder="0"></iframe>
+        <div>
+          <span class="statics">在线人数：<strong>{{ users.length }}</strong></span>
+          &nbsp;&nbsp;
+          <span class="statics">浏览次数：<strong>{{ viewed }}</strong></span>
+        </div>
       </div>
 
       <div class="col">
@@ -167,7 +170,6 @@
   }
   .video{
     width: 100%;
-    height: 170px;
     z-index: 999;
   }
   .video iframe{
@@ -341,6 +343,9 @@
   .statics{
     color: gray;
     font-size: 12px;
+  }
+  .py-4{
+    padding: 0 !important;
   }
 
 </style>

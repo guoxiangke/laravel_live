@@ -56,10 +56,10 @@ class LiveController extends Controller
      * @param  \App\Models\Live  $live
      * @return \Illuminate\Http\Response
      */
-    public function show(Live $live)
+    public function show(Request $request, Live $live)
     {
         $user = Auth::user()->load('socials');
-        $live->isLive = $live->is_live;
+        $live->live = $request->query('live')?:$live->is_live;
         activity()
            ->causedBy($user)
            ->performedOn($live)
