@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginSocialController extends Controller
 {
@@ -76,6 +77,6 @@ class LoginSocialController extends Controller
             //执行登录！
             $user = Auth::loginUsingId($social->user_id, true);//自动登入！
         }
-        return redirect('home');
+        return Redirect::intended('home');
     }
 }
