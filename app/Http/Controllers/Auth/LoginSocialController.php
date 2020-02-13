@@ -34,6 +34,7 @@ class LoginSocialController extends Controller
         $loginedId = Auth::id();
         // \Log::error(__CLASS__, [__FUNCTION__, $type, $loginedId]);
         // \Log::error(__CLASS__, [__FUNCTION__, $socialUser]);
+        $avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
         if($loginedId){
             //用户已登录，执行绑定！
             Social::firstOrCreate([
@@ -41,14 +42,14 @@ class LoginSocialController extends Controller
                 'user_id'   => $loginedId,
                 'type'      => $type,
                 'name'      => $socialUser->nickname ?: $socialUser->name,
-                'avatar'      => $socialUser->avatar,
+                'avatar'    => $avatar,
             ]);
         }else{ //未登录，执行登录！
             $social = Social::where('social_id', $socialUser->id)->first();
             if($social){ //已绑定，并定期更新头像
                 if($social->updated_at->diffInDays(now()) > 1) {
                     // $social->name = $name;
-                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar);
+                    $social->avatar = $avatar;
                     if($social->isDirty()){
                         $social->save();
                     }
@@ -59,23 +60,27 @@ class LoginSocialController extends Controller
                 $token = Str::random(10);
                 $password = Hash::make(Str::random(8));
                 $name = $socialUser->nickname ?: $socialUser->name;
-                $user = User::create([
-                    'name' => $name,
-                    'email' => $email,
-                    'email_verified_at' => now(),
-                    'password' => $password,
-                    'remember_token' => $token,
-                ]);
-                $social = Social::create([
+                $user = User::where('email', $email)->first();
+                if(!$user){
+                    $user = User::create([
+                        'name' => $name,
+                        'email' => $email,
+                        'email_verified_at' => now(),
+                        'password' => $password,
+                        'remember_token' => $token,
+                    ])
+                }
+
+                Social::firstOrCreate([
                     'social_id' => $socialId,
                     'user_id'   => $user->id,
                     'type'      => $type,
                     'name'      => $name,
-                    $social->avatar = Str::replaceFirst('http://', 'https://', $socialUser->avatar),
+                    'avatar'    => $avatar,
                 ]);
             }
             //执行登录！
-            $user = Auth::loginUsingId($social->user_id, true);//自动登入！
+            $user = Auth::loginUsingId($user->id, true);//自动登入！
         }
         return Redirect::intended('home');
     }
