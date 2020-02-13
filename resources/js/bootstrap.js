@@ -48,3 +48,9 @@ window.Echo = new Echo({
     // so it does not try to fallback to other methods Pusher.com does support.
     enabledTransports: ['ws', 'wss'],
 });
+
+
+function removeFocus() {
+    document.activeElement.blur();
+}
+document.body.addEventListener("touchstart", removeFocus);

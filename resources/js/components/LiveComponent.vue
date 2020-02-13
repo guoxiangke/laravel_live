@@ -161,8 +161,10 @@
 </script>
 
 <style>
-  .body {
-    height: 100vh;
+  html,body{
+     -webkit-overflow-scrolling : touch !important;
+     overflow: auto !important;
+     height: 100% !important;
   }
   .tab-wrapper{
     border-top: none;
@@ -213,6 +215,9 @@
   .scroll-list{
     height:60vh; 
     overflow-y:scroll
+  }
+  .scroll-list:first-child{
+    padding-top: 15px;
   }
   .intercom-conversation-background{
     background-image: url(/image/background-1@2x.aea5e218.png);
