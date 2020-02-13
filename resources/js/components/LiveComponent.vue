@@ -28,7 +28,7 @@
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
              
             <div class="tab-wrapper">
-                <div class="list-unstyled scroll-list" v-chat-scroll>
+                <div class="list-unstyled scroll-list" id="scroll" v-chat-scroll>
                     <div class="li" v-bind:class="checkCodes(message.user_id)" v-for="(message, index) in messages" :key="index" >
                       <div class="intercom-comment-container" >
                         <div class="intercom-comment-container-admin-avatar">
@@ -115,7 +115,10 @@
                     this.users = this.users.filter(u => u.id != user.id);
                 })
                 .listen('MessageSent', (event) => {
+                    console.log(event);
                     this.messages.push(event.message);
+                    var objDiv = document.getElementById("scroll");
+                    objDiv.scrollTop = objDiv.scrollHeight;
                 })
                 .listenForWhisper('typing', user => {
                    this.activeUser = user;
@@ -149,6 +152,10 @@
                     live: this.live,
                     message: this.newMessage
                 });
+                
+                var objDiv = document.getElementById("scroll");
+                objDiv.scrollTop = objDiv.scrollHeight;
+
                 axios.post('/messages', {message: this.newMessage, live: this.live.id});
                 this.newMessage = '';
             },
@@ -162,9 +169,9 @@
 
 <style>
   html,body{
-     -webkit-overflow-scrolling : touch !important;
-     overflow: auto !important;
-     height: 100% !important;
+    -webkit-overflow-scrolling : touch !important;
+    overflow: auto !important;
+    height: 100% !important;
   }
   .tab-wrapper{
     border-top: none;
