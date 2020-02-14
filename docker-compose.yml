@@ -23,7 +23,7 @@ services:
       - .env:/var/www/html/.env
       - ./docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./storage/app:/var/www/html/storage/app
-      - "/root/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
+      - "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
     network_mode: "bridge"
 
   # Nginx Service
