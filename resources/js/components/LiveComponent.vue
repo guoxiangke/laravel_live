@@ -101,7 +101,6 @@
         mounted: function () {
             $('#intercom-textarea').blur(function(){
               $(window).resize();
-              $('#home-tab').trigger('click');
               $('.intercom-conversation-footer').css('position','fixed');
               console.log('blur');
             });
