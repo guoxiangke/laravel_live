@@ -77,7 +77,7 @@
 	}
 
 	.scroll-list{
-		height: 60vh; 
+		height: 50vh; 
 		overflow-y: scroll;
 	}
 	.scroll-list:first-child{
