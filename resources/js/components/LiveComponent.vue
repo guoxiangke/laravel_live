@@ -100,8 +100,12 @@
         },
         mounted: function () {
             $('#intercom-textarea').blur(function(){
+              $(window).resize();
               $('.intercom-conversation-footer').css('position','fixed');
               console.log('blur');
+            });
+            $(window).resize(function() {
+              console.log('resized');
             });
 
             $('#intercom-textarea').focus(function(){
