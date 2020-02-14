@@ -1,5 +1,5 @@
 <template>
-   <div class="row">
+   <div class="liveComponent">
       <div class="intercom-conversation-background"></div>
       <div class="video text-center">
         <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.live" frameborder="0"></iframe>
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="col">
+      <div class="tabs-wrapper">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">在线消息</a>
@@ -45,20 +45,6 @@
                       <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }}</div>
                   </div>
                 </div>
-                  
-                <div class="intercom-conversation-footer">
-                  <div class="intercom-composer">
-                    <textarea
-                        id="intercom-textarea"
-                        @keydown="sendTypingEvent"
-                        @keyup.enter="sendMessage"
-                        v-model="newMessage"
-                        type="textarea"
-                        name="message"
-                        placeholder="发布消息..."></textarea>
-                    <button class="intercom-composer-send-button" @click="sendMessage"></button>
-                  </div>
-                </div>
             </div>
             
           </div>
@@ -81,8 +67,20 @@
             </p>
           </div>
         </div>
-
       </div>
+        
+          
+        <div class="intercom-conversation-footer">
+            <textarea
+                id="intercom-textarea"
+                @keydown="sendTypingEvent"
+                @keyup.enter="sendMessage"
+                v-model="newMessage"
+                type="textarea"
+                name="message"
+                placeholder="发布消息..."></textarea>
+            <button class="intercom-composer-send-button" @click="sendMessage"></button>
+        </div>
 
    </div>
 </template>
@@ -178,14 +176,28 @@
 
 <style>
   html,body{
-    -webkit-overflow-scrolling : touch !important;
-    overflow: auto !important;
-    height: 100% !important;
+    background: green;
   }
-  .tab-wrapper{
-    border-top: none;
-    border-radius: 0;
+  #app>nav{
+    display: none;
   }
+  .py-4{
+    padding: 0 !important;
+  }
+
+  #myTabContent{
+    /*margin-bottom: 50px;*/
+  }
+  .py-4 .container{
+    padding: 0;
+  }
+  .tabs-wrapper{
+    padding: 0 0 0 15px;
+    }
+    .tab-wrapper{
+      border-top: none;
+      border-radius: 0;
+    }
   .video{
     width: 100%;
     z-index: 999;
@@ -207,21 +219,13 @@
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
   }
 
-  .intercom-composer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 55px;
-    max-height: 200px;
-  }
   .intercom-conversation-footer{
     opacity: 1;
     animation-delay: 80ms;
     animation-timing-function: cubic-bezier(.23, 1, .32, 1);
     animation-duration: .32s;
-    position: absolute;
-    bottom: -8px;
+    position: fixed;
+    bottom: 0px;
     left: 0;
     right: 0;
     border-radius: 0 0 6px 6px;
@@ -229,12 +233,14 @@
   
   .scroll-list{
     height:60vh; 
-    overflow-y:scroll
+    overflow-y:scroll;
+    background: rebeccapurple;
   }
   .scroll-list:first-child{
     padding-top: 15px;
   }
   .intercom-conversation-background{
+    display: none;
     background-image: url(/image/background-1@2x.aea5e218.png);
     background-size: 417px 417px;
     background-repeat: repeat;
@@ -341,8 +347,7 @@
     height: 30px;
     border-radius: 50%;
   }
-  .right {
-  }
+
   .right .intercom-comment-container {
     padding: 0;
     padding: none;
@@ -357,15 +362,9 @@
     color: #fff;
     background-color: #1F8CEB;
   }
-  #myTabContent{
-    margin-bottom: 50px;
-  }
   .statics{
     color: gray;
     font-size: 12px;
-  }
-  .py-4{
-    padding: 0 !important;
   }
 
 </style>
