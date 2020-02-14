@@ -105,7 +105,7 @@
               console.log('blur');
             });
             $(window).resize(function() {
-              console.log('resized');
+              console.log('resize');
             });
 
             $('#intercom-textarea').focus(function(){
@@ -181,6 +181,14 @@
 <style>
   html,body{
     background: green;
+  }
+  html {
+      overflow: hidden;
+      height: 100%;
+  }
+  body {
+      height: 100%;
+      overflow: auto;
   }
   #app>nav{
     display: none;
