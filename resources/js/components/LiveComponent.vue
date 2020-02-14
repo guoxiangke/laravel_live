@@ -180,9 +180,6 @@
 </script>
 
 <style>
-  html,body{
-    background: green;
-  }
   html {
       overflow: hidden;
       height: 100%;
@@ -238,22 +235,20 @@
     animation-timing-function: cubic-bezier(.23, 1, .32, 1);
     animation-duration: .32s;
     position: fixed;
-    bottom: 0px;
+    bottom: -7px;
     left: 0;
     right: 0;
     border-radius: 0 0 6px 6px;
   }
   
   .scroll-list{
-    height:60vh; 
+    height:50vh; 
     overflow-y:scroll;
-    background: rebeccapurple;
   }
   .scroll-list:first-child{
     padding-top: 15px;
   }
   .intercom-conversation-background{
-    display: none;
     background-image: url(/image/background-1@2x.aea5e218.png);
     background-size: 417px 417px;
     background-repeat: repeat;
