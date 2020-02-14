@@ -100,7 +100,16 @@
                 room: 'live.' + this.live.id,
             }
         },
-        computed: {
+        mounted: function () {
+            $('#intercom-textarea').blur(function(){
+              $('.intercom-conversation-footer').css('position','fixed');
+              console.log('blur');
+            });
+
+            $('#intercom-textarea').focus(function(){
+              console.log('focus');
+              $('.intercom-conversation-footer').css('position','absolute');
+            });
         },
         created() {
             this.fetchMessages();
@@ -211,8 +220,7 @@
     animation-delay: 80ms;
     animation-timing-function: cubic-bezier(.23, 1, .32, 1);
     animation-duration: .32s;
-
-    position: fixed;
+    position: absolute;
     bottom: -8px;
     left: 0;
     right: 0;
@@ -276,7 +284,7 @@
     opacity: 1;
     background-color: #1F8CEB;
     transition: opacity .12s ease-in;
-    z-index: 999;
+    border: none;
   }
 
   .intercom-comment-container{
