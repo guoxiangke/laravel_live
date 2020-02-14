@@ -287,3 +287,6 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### 登录后跳转之前页面
 		https://stackoverflow.com/questions/15389833/laravel-redirect-back-to-original-destination-after-login
 		return Redirect::intended('home')
+	### iphone 输入框 键盘 隐藏
+		https://segmentfault.com/q/1010000008281411/a-1020000008282334
+		https://www.jotform.com/answers/1582331-iOS-Input-doesn-t-loose-focus-if-button-is-clicked-outside-of-iframe
