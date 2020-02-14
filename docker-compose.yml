@@ -114,7 +114,7 @@ services:
     volumes:
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
-      - "/var/www/html/docker-nginx-https/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
+      - "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
     environment:
       REDIS_PORT: 6379
       CONTAINER_ROLE: websockets
