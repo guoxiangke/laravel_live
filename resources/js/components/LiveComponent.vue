@@ -1,6 +1,5 @@
 <template>
    <div class="liveComponent">
-      <div class="intercom-conversation-background"></div>
       <div class="video text-center">
         <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.live" frameborder="0"></iframe>
         <div>
@@ -186,6 +185,18 @@
   body {
       height: 100%;
       overflow: auto;
+
+      background-image: url(/image/background-1@2x.aea5e218.png);
+      background-size: 417px 417px;
+      background-repeat: repeat;
+      background-color: #fff;
+  }
+  textarea:focus
+  {
+      outline:none; /*or outline-color:#FFFFFF; if the first doesn't work*/
+      border:1px solid #3490dc;
+      -webkit-box-shadow: 0px 0px 4px 0px #3490dc;
+      box-shadow: 0px 0px 4px 0px #3490dc;
   }
   #app>nav{
     display: none;
@@ -246,18 +257,6 @@
   }
   .scroll-list:first-child{
     padding-top: 15px;
-  }
-  .intercom-conversation-background{
-    background-image: url(/image/background-1@2x.aea5e218.png);
-    background-size: 417px 417px;
-    background-repeat: repeat;
-    position: absolute;
-    top: 55px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    opacity: .5;
   }
   #intercom-textarea{
     width: 100%;
