@@ -117,16 +117,9 @@
         },
         mounted: function () {
             $('#intercom-textarea').blur(function(){
-              $(window).resize();
               $('.intercom-conversation-footer').css('position','fixed');
-              console.log('blur');
             });
-            $(window).resize(function() {
-              console.log('resize');
-            });
-
             $('#intercom-textarea').focus(function(){
-              console.log('focus');
               $('.intercom-conversation-footer').css('position','absolute');
             });
 
@@ -205,8 +198,8 @@
                 this.newMessage = '';
             },
             sendTypingEvent() {
-                Echo.join(this.room)
-                    .whisper('typing', this.user);
+              console.log('whisper-typing');
+                // Echo.join(this.room).whisper('typing', this.user);
             }
         }
     }
