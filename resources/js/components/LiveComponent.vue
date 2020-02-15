@@ -7,6 +7,7 @@
           &nbsp;&nbsp;
           <span class="statics">浏览次数：<strong>{{ viewed }}</strong></span>
         </div>
+        <a href="#" id="scroll-down">ScrollDown</a>
       </div>
 
       <div class="tabs-wrapper">
@@ -27,7 +28,7 @@
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
              
             <div class="tab-wrapper">
-                <div class="list-unstyled scroll-list" id="scroll" v-chat-scroll>
+                <div class="list-unstyled scroll-list" id="scroll">
                     <div class="li" v-bind:class="checkCodes(message.user_id)" v-for="(message, index) in messages" :key="index" >
                       <div class="intercom-comment-container" >
                         <div class="intercom-comment-container-admin-avatar">
@@ -83,7 +84,24 @@
 
    </div>
 </template>
-
+<style>
+  #scroll-down{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    width:40px;
+    height:40px;
+    opacity:0.3;
+    position:fixed;
+    top:270px;
+    right:1em;
+    z-index: 10001;
+    text-indent:-9999px;
+    background: url('/image/icon_top.png') no-repeat;
+}
+</style>
 <script>
     export default {
         props:['user', 'live', 'viewed'],
@@ -111,6 +129,22 @@
               console.log('focus');
               $('.intercom-conversation-footer').css('position','absolute');
             });
+
+            $('#scroll-down').click(function(){
+              let scroll = $("#scroll");
+              scroll.animate({ scrollTop: scroll.prop('scrollHeight') }, 1000);
+              $(this).toggleClass('d-none');
+            });
+
+            $( "#scroll" ).scroll(function() {
+              let h1 = $(this).prop('scrollHeight');
+              let h2 = $(this).prop('scrollTop');
+              if(h1 - h2 <= 1000){
+                $('#scroll-down').addClass('d-none');
+              }else{
+                $('#scroll-down').removeClass('d-none');
+              }
+            });
         },
         created() {
             this.fetchMessages();
@@ -125,10 +159,15 @@
                     this.users = this.users.filter(u => u.id != user.id);
                 })
                 .listen('MessageSent', (event) => {
-                    console.log(event);
                     this.messages.push(event.message);
-                    var objDiv = document.getElementById("scroll");
-                    objDiv.scrollTop = objDiv.scrollHeight;
+
+                    let scroll = $("#scroll");
+                    let h1 = scroll.prop('scrollHeight');
+                    let h2 = scroll.prop('scrollTop');
+                    if(h1 - h2 < 1000){
+                      scroll.animate({ scrollTop: scroll.prop('scrollHeight') }, 1000);
+                      $('#scroll-down').addClass('d-none');
+                    }
                 })
                 .listenForWhisper('typing', user => {
                    this.activeUser = user;
@@ -152,8 +191,7 @@
             sendMessage() {
                 this.newMessage = this.newMessage.replace(/(\r\n|\n|\r)/gm, "").trim();
                 if(this.newMessage.length == 0) {
-                  $('#intercom-textarea').focus();
-                  $('#intercom-textarea').attr('placeholder','请输入消息！');
+                  $('#intercom-textarea').focus().attr('placeholder','请输入消息！');
                   return;
                 }
                 this.messages.push({
@@ -162,9 +200,6 @@
                     live: this.live,
                     message: this.newMessage
                 });
-                
-                var objDiv = document.getElementById("scroll");
-                objDiv.scrollTop = objDiv.scrollHeight;
 
                 axios.post('/messages', {message: this.newMessage, live: this.live.id});
                 this.newMessage = '';
