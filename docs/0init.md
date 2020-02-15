@@ -266,7 +266,7 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### docker volume rm laravel_live_code
 	 	qq-sh
 	 		docker-compose down  && docker volume rm laravel-live_code && docker-compose up -d
-		docker-compose down  && docker volume rm laravel_live_code && docker-compose up -d --build
+		git pull && docker-compose down  && docker volume rm laravel_live_code && docker-compose up -d --build && docker push guoxiangke/live
 
 	### npm run prod bug:
 		"sass-loader": "^8.0.2",

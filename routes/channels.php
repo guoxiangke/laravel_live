@@ -17,7 +17,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 
 
 // todo 是否有权限加入该聊天室！
-Broadcast::channel('live.{liveId}', function ($user, $liveId) {
+Broadcast::channel('lives.{liveId}', function ($user, $liveId) {
 	// if ($user->canJoinRoom($roomId)) {
     // return ['id' => $user->id, 'name' => $user->name];
     // }

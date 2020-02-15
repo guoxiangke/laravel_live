@@ -112,7 +112,7 @@
                 users:[],
                 activeUser: false,
                 typingTimer: false,
-                room: 'live.' + this.live.id,
+                room: 'lives.' + this.live.id,
             }
         },
         mounted: function () {

@@ -34,7 +34,12 @@ class MessageSent implements ShouldBroadcast //ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        // live.1
-        return new PresenceChannel('live.'.$this->message->live_id);
+        // lives.1 
+        // chats.1
+        // lives = $this->message->getTable()
+        // 1 = messageable_id - integer == $this->message->messageable->id
+        // messageable_type - string
+        $channelPath = $this->message->getTable() . '.' .   $this->message->messageable->id
+        return new PresenceChannel($channelPath);
     }
 }
