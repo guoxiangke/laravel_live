@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resources(['live' => 'LiveController']);
+Route::post('live/message/{live}', 'MessageController@storeLive');
 Route::resources(['messages' => 'MessageController']);
 // Route::get('/messages/{id}', 'MessageController@fetchMessages');
 // Route::post('/messages', 'MessageController@sendMessage');

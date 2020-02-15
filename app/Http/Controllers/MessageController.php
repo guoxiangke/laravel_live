@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use App\Models\Live;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 
 class MessageController extends Controller
@@ -26,7 +27,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return Message::with('user','user.social')->where('live_id', 1)->get();
+
     }
 
     /**
@@ -47,12 +48,17 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $message = auth()->user()->messages()->create([
+    }
+
+
+    public function storeLive(Live $live, Request $request)
+    {
+        $message = $live->messages()->create([
+            'user_id' => Auth::user()->id,
             'message' => $request->message,
-            'live_id' => $request->live, //todo
         ]);
 
-        broadcast(new MessageSent($message->load('user', 'user.socials')))->toOthers();
+        broadcast(new MessageSent($message->load('user.socials')))->toOthers();
 
         return ['status' => 'success'];
     }
@@ -64,11 +70,8 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(int $liveId)
+    public function show()
     {
-        $messages =  Message::with('user', 'user.socials')->where('live_id', $liveId)->get();
-        
-        return response()->json($messages);
     }
 
     /**

@@ -14,7 +14,10 @@ $factory->define(Message::class, function (Faker $faker) {
             return factory(User::class)
                 ->create()->id;
         },
-        'live_id' => function () {
+        'messageable_type' => function () {
+            return Live::class;
+        },
+        'messageable_id' => function () {
             return factory(Live::class)
                 ->create()->id;
         },

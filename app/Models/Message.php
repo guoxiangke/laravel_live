@@ -25,12 +25,27 @@ class Message extends Model
 
     protected $fillable = [
         'message', 
-        'user_id', 
-        'live_id',
+        'user_id', //from_uid
+        'messageable_id',
+        'messageable_type',
         'extra_attributes',
     ];
 
     public function user(){
     	return $this->belongsTo(User::Class);
+    }
+
+    public function from(){
+        return $this->user();
+    }
+
+    /**
+     * to() 发送到哪里？发送给谁？ 
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function messageable()
+    {
+        return $this->morphTo();
     }
 }

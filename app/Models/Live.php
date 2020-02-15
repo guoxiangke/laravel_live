@@ -18,7 +18,7 @@ class Live extends Model
     protected static $logOnlyDirty = true;
     
     use HasSchemalessAttributes;
-    const EXTRA_ATTRIBUTES = ['to','do'];
+    const EXTRA_ATTRIBUTES = ['numbers', 'do'];
     public $casts = [
         'extra_attributes' => 'array',
     ];
@@ -43,5 +43,15 @@ class Live extends Model
     public function getIsLiveAttribute()
     {
         return 0; //1 is live. todo check with rrule!
+    }
+
+    /**
+     * 取得
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'messageable');
     }
 }

@@ -59,6 +59,7 @@ class LiveController extends Controller
     public function show(Request $request, Live $live)
     {
         $user = Auth::user()->load('socials');
+        $live->load('messages.user.socials');
         $live->live = $request->query('live')?:$live->is_live;
         activity()
            ->causedBy($user)

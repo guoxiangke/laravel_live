@@ -15,19 +15,22 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id'); // from_uid
             $table->text('message');
-            $table->unsignedBigInteger('live_id');
+            // Model
+                // Live: 直播聊天室
+                // Chat: 一对一聊天
+                // Group:多人聊天室
+            //model_id
+            $table->morphs('messageable');
+            // messageable_id - integer
+            // messageable_type - string
             $table->schemalessAttributes('extra_attributes');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')
                ->references('id')->on('users')
-               ->onDelete('cascade');
-
-            $table->foreign('live_id')
-               ->references('id')->on('lives')
                ->onDelete('cascade');
         });
     }

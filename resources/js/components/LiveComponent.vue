@@ -107,7 +107,7 @@
         props:['user', 'live', 'viewed'],
         data() {
             return {
-                messages: [],
+                messages: this.live.messages,
                 newMessage: '',
                 users:[],
                 activeUser: false,
@@ -140,7 +140,7 @@
             });
         },
         created() {
-            this.fetchMessages();
+            // this.fetchMessages();
             Echo.join(this.room)
                 .here(user => {
                     this.users = user;
@@ -176,11 +176,11 @@
             checkCodes: function(user_id) {
               return user_id == this.user.id?'right float-right':'';
             },
-            fetchMessages() {
-                axios.get('/messages/'+this.live.id).then(response => {
-                    this.messages = response.data;
-                })
-            },
+            // fetchMessages() {
+            //     axios.get('/messages/'+this.live.id).then(response => {
+            //         this.messages = response.data;
+            //     })
+            // },
             sendMessage() {
                 this.newMessage = this.newMessage.replace(/(\r\n|\n|\r)/gm, "").trim();
                 if(this.newMessage.length == 0) {
@@ -194,7 +194,7 @@
                     message: this.newMessage
                 });
 
-                axios.post('/messages', {message: this.newMessage, live: this.live.id});
+                axios.post('/live/message/'+this.live.id, {message: this.newMessage});
                 this.newMessage = '';
             },
             sendTypingEvent() {

@@ -6,9 +6,23 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
-	- 集成m3u8 live播放器
-	- 头像，昵称，在线人数
+	bluma or bootstrap!?!
+	user
+		login with telephone/name!
+	role
+	permisson
+	CURD of Live
+	CURD of Rrule
+
+	model json filter
+	一对一聊天？
+		/current_user/chat/to_uid
+	群组聊天without of live.
+	## improve
+		laravel-websockets => socket.io
 	## done
+		- 集成m3u8 live播放器
+		- 头像，昵称，在线人数
 		- docker容器化部署
 			- socket需要暴露端口给前端Echo
 		- 配置队列redis + queue + horizon
@@ -237,7 +251,8 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 		\App\Models\Live::create(['title' => "测试live",'description' => "Hello，直播聊天时，这里可以是一个图文结束，todo：开始时间/结束时间",'user_id' => 1,'rrule_id' => 1,]);
 		\App\User::create(['name'=>'admin','email'=>'admin@admin.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
 		\App\User::create(['name'=>'test','email'=>'test@test.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
-		update users set password="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+		mysql
+			update users set password="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
 	### 直播 model & Route::resource('lives', 'LiveController');  bug！
 		lives的单数 ==》life了！
 		live 改为 chats或
@@ -249,6 +264,8 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### Uncaught You must pass your app key when you instantiate Pusher.
 		https://github.com/laravel/echo/issues/20 Echo won´t initiate Pusher
 	### docker volume rm laravel_live_code
+	 	qq-sh
+	 		docker-compose down  && docker volume rm laravel-live_code && docker-compose up -d
 		docker-compose down  && docker volume rm laravel_live_code && docker-compose up -d --build
 
 	### npm run prod bug:
@@ -287,6 +304,12 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### 登录后跳转之前页面
 		https://stackoverflow.com/questions/15389833/laravel-redirect-back-to-original-destination-after-login
 		return Redirect::intended('home')
+	### js
+
+        // var objDiv = document.getElementById("scroll");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+        scroll.animate({ scrollTop: scroll.get(0).scrollHeight }, 1000);
+        scroll.animate({ scrollTop: scroll.prop('scrollHeight') }, 1000);
 	### iphone 输入框 键盘 隐藏
 		https://segmentfault.com/q/1010000008281411/a-1020000008282334
 		https://www.jotform.com/answers/1582331-iOS-Input-doesn-t-loose-focus-if-button-is-clicked-outside-of-iframe
