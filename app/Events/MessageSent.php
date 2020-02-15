@@ -39,7 +39,7 @@ class MessageSent implements ShouldBroadcast //ShouldBroadcastNow
         // lives = $this->message->getTable()
         // 1 = messageable_id - integer == $this->message->messageable->id
         // messageable_type - string
-        $channelPath = $this->message->getTable() . '.' .   $this->message->messageable->id
+        $channelPath = $this->message->getTable() . '.' .   $this->message->messageable->id;
         return new PresenceChannel($channelPath);
     }
 }
