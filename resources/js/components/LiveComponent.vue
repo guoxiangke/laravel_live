@@ -1,7 +1,7 @@
 <template>
    <div class="liveComponent">
       <div class="video text-center">
-        <iframe :src="'https://livelss.bj.bcebos.com/index.html?stream=classroom&vid=202002&preset=L3&live=' + live.live" frameborder="0"></iframe>
+        <iframe :src="'https://livelss.cdn.bcebos.com/index.html?stream=classroom&vid=' + live.vid + '&preset=L3&live=' + live.live" frameborder="0"></iframe>
         <div>
           <span class="statics">在线人数：<strong>{{ users.length }}</strong></span>
           &nbsp;&nbsp;

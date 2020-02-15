@@ -61,6 +61,7 @@ class LiveController extends Controller
         $user = Auth::user()->load('socials');
         $live->load('messages.user.socials');
         $live->live = $request->query('live')?:$live->is_live;
+        $live->vid = $request->query('vid')?:date('Ymd');
         activity()
            ->causedBy($user)
            ->performedOn($live)
