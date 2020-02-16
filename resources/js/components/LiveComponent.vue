@@ -167,6 +167,7 @@
 
             tabs[0].click();
           })();
+          // tabs end
         },
         created() {
             // this.fetchMessages();

@@ -17,7 +17,7 @@
     @yield('style')
 </head>
 <body>
-    <div id="app"  class="container">
+    <div id="app">
         @include('layouts.nav')
         
         @include('partials.alerts')

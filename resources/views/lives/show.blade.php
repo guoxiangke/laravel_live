@@ -11,7 +11,12 @@
 
 @section('style')
 <style>
+	html {
+	    overflow: hidden;
+	    height: 100%;
+	}
 	body {
+		height: 100%;
 		overflow: auto;
 
 		background-image: url(/image/background-1@2x.aea5e218.png);
@@ -25,10 +30,6 @@
 		border:1px solid #3490dc;
 		-webkit-box-shadow: 0px 0px 4px 0px #3490dc;
 		box-shadow: 0px 0px 4px 0px #3490dc;
-	}
-	#app {
-		height: 100%;
-   	 	overflow: hidden;
 	}
 	#app>nav{
 		display: none;
