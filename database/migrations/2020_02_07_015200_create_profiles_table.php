@@ -16,9 +16,11 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            // 可以重名！
             $table->string('first_name')->nullable()->comment('名');
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable()->comment('姓');
+            
             $table->boolean('sex')->default(0); // 0
             $table->date('birthday')->nullable();
             //country. see telephone with(+)86

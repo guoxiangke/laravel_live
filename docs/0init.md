@@ -6,9 +6,8 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
-	bluma or bootstrap!?!
 	user
-		login with telephone/name!
+		login with telephone!
 	role
 	permisson
 	CURD of Live
@@ -21,6 +20,7 @@
 	## improve
 		laravel-websockets => socket.io
 	## done
+		- bluma instead of bootstrap
 		- 集成m3u8 live播放器
 		- 头像，昵称，在线人数
 		- docker容器化部署
@@ -228,7 +228,12 @@
 ## profiles / Profile
 	php artisan make:model Models\\Profile --all
 
+## Bulma
+	npm install bulma
 
+    <link href="https://libs.cdnjs.net/bulma/0.8.0/css/bulma.css" rel="stylesheet">
+
+    https://eiji.dev/bulma-tabs-with-content.html
 
 ## mtvs/eloquent-hashids
 
@@ -239,6 +244,11 @@
 ## user role permission
 
 ## weixin/social login & weixin user profile
+
+## Session alerts
+
+    // $request->session()->flash('success', 'Logined!');
+    // $request->session()->flash('success-info', 'More info about this alerts!');
 
 	
 composer require inertiajs/inertia-laravel tightenco/ziggy reinink/remember-query-strings
@@ -265,7 +275,7 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 		https://github.com/laravel/echo/issues/20 Echo won´t initiate Pusher
 	### docker volume rm laravel_live_code
 	 	qq-sh
-	 		docker-compose down  && docker volume rm laravel-live_code && docker-compose up -d
+	 		docker pull guoxiangke/live && docker-compose down  && docker volume rm laravel-live_code && docker-compose up -d
 		git pull && docker-compose down  && docker volume rm laravel_live_code && docker-compose up -d --build && docker push guoxiangke/live
 
 	### npm run prod bug:

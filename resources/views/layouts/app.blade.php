@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,63 +17,49 @@
     @yield('style')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
+    <div id="app"  class="container">
+        @include('layouts.nav')
+        
+        @include('partials.alerts')
+        
+        <div class="d-blocks">
             @yield('content')
-        </main>
+        </div> <!-- end d-blocks -->
+    </div> <!-- end app -->
 
-    </div>
+    <script type="text/javascript">
+        window.onload = function () {
+            $('.notification').on('click',function(){
+                $(this).slideUp('slowly');
+            });
+            setTimeout(function(){ $('.notification').slideUp('slowly')}, 3000);
+
+            // Check for click events on the navbar burger icon
+            $(".navbar-burger").click(function() {
+              // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+              $(".navbar-burger").toggleClass("is-active");
+              $(".navbar-menu").toggleClass("is-active");
+            });
+
+
+            $('a.btn-confirm').click(function(e){
+                let msg = $(this).attr('data-confirm');
+                msg = typeof(msg)=='undefined'?'Are you sure!':msg;
+                if (!confirm(msg)) {
+                    e.preventDefault();
+                }
+            });
+
+            $('.submit-confirm').click(function(e){
+              e.preventDefault();
+              let msg = $(this).attr('data-confirm');
+              msg = typeof(msg)=='undefined'?'Are you sure!':msg;
+              if (confirm(msg)) {
+                  $(this).parent('form').submit();
+              }
+            });
+          };
+    </script>
     @yield('script')
 </body>
 </html>

@@ -21,7 +21,7 @@ Broadcast::channel('lives.{liveId}', function ($user, $liveId) {
 	// if ($user->canJoinRoom($roomId)) {
     // return ['id' => $user->id, 'name' => $user->name];
     // }
-	return $user;
+	return $user->load('socials');
 });
 
 Broadcast::channel('chat.{roomId}', function ($user, $roomId) {

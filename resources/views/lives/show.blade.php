@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="main-content">
+	<div class="video">
+		<iframe src="{{$live->m3u}}" frameborder="0" width="100%" height="200px"></iframe>
+	</div>
     <live :user="{{ $user }}" :live="{{ $live }}" :viewed="{{ $viewed }}"></live>
 </div>
 @endsection
@@ -28,28 +31,12 @@
 		-webkit-box-shadow: 0px 0px 4px 0px #3490dc;
 		box-shadow: 0px 0px 4px 0px #3490dc;
 	}
+	#app {
+		height: 100%;
+   	 	overflow: hidden;
+	}
 	#app>nav{
 		display: none;
-	}
-	.py-4{
-		padding-bottom: 0 !important;
-	}
-	.py-4 .container{
-		padding: 0;
-	}
-	.tabs-wrapper{
-		padding: 0 0 0 15px;
-	}
-	.tab-wrapper{
-		border-top: none;
-		border-radius: 0;
-	}
-	.video{
-		width: 100%;
-		z-index: 999;
-	}
-	.video iframe{
-		height: 160px;
 	}
 
 	::-webkit-scrollbar {
@@ -64,6 +51,27 @@
 		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 	}
 
+	.scrollable{
+	    padding-top: 1rem;
+	    height: 55vh; 
+	    overflow-y: scroll;
+	}
+	.scroll-down{
+	    -webkit-transform: rotate(180deg);
+	    -moz-transform: rotate(180deg);
+	    -ms-transform: rotate(180deg);
+	    -o-transform: rotate(180deg);
+	    transform: rotate(180deg);
+	    width:40px;
+	    height:40px;
+	    opacity:0.3;
+	    position:fixed;
+	    top:270px;
+	    right:1em;
+	    z-index: 10001;
+	    text-indent:-9999px;
+	    background: url('/image/icon_top.png') no-repeat;
+	}
 	.intercom-conversation-footer{
 		opacity: 1;
 		animation-delay: 80ms;
@@ -76,13 +84,6 @@
 		border-radius: 0 0 6px 6px;
 	}
 
-	.scroll-list{
-		height: 50vh; 
-		overflow-y: scroll;
-	}
-	.scroll-list:first-child{
-		padding-top: 15px;
-	}
 	#intercom-textarea{
 		width: 100%;
 		bottom: 0;
@@ -172,11 +173,21 @@
 		display: inline-block;
 		vertical-align: middle;
 	}
-
 	.intercom-avatar img{
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
+	}
+	.chat-avatar{
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+	}
+	#online-avatar{
+		margin: 1rem 0 1rem 1rem;
+	}
+	.chat-profile{
+		width: 50px;
 	}
 
 	.right .intercom-comment-container {
