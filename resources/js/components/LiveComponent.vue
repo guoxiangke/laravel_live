@@ -18,7 +18,7 @@
       </div>
       <div class="tab-contents">
         <section class="tab-content">
-          <div class="scroll-content scrollable">
+          <div class="scroll-content scrollable" id="message-scroll">
               <a href="#" class="scroll-down is-hidden"></a>
               <div class="li" v-bind:class="checkCodes(message.user_id)" v-for="(message, index) in messages" :key="index" >
                 <div class="intercom-comment-container" >
@@ -185,12 +185,12 @@
                 .listen('MessageSent', (event) => {
                     this.messages.push(event.message);
 
-                    let scroll = $("#scroll");
+                    let scroll = $("#message-scroll");
                     let h1 = scroll.prop('scrollHeight');
                     let h2 = scroll.prop('scrollTop');
                     if(h1 - h2 < 1000){
                       scroll.animate({ scrollTop: scroll.prop('scrollHeight') }, 1000);
-                      $('#scroll-down').addClass('d-none');
+                      $('#message-scroll.scroll-down').addClass('is-hidden');
                     }
                 })
                 .listenForWhisper('typing', user => {
@@ -225,6 +225,13 @@
                     message: this.newMessage
                 });
 
+                let scroll = $("#message-scroll");
+                let h1 = scroll.prop('scrollHeight');
+                let h2 = scroll.prop('scrollTop');
+                if(h1 - h2 < 1000){
+                  scroll.animate({ scrollTop: scroll.prop('scrollHeight') }, 1000);
+                  $('#message-scroll.scroll-down').addClass('is-hidden');
+                }
                 axios.post('/live/message/'+this.live.id, {message: this.newMessage});
                 this.newMessage = '';
             },
