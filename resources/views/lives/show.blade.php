@@ -11,12 +11,7 @@
 
 @section('style')
 <style>
-	html {
-	  overflow: hidden;
-	  height: 100%;
-	}
 	body {
-		height: 100%;
 		overflow: auto;
 
 		background-image: url(/image/background-1@2x.aea5e218.png);
@@ -64,12 +59,11 @@
 	    transform: rotate(180deg);
 	    width:40px;
 	    height:40px;
-	    opacity:0.3;
+	    opacity:0.5;
 	    position:fixed;
 	    top:270px;
 	    right:1em;
 	    z-index: 10001;
-	    text-indent:-9999px;
 	    background: url('/image/icon_top.png') no-repeat;
 	}
 	.intercom-conversation-footer{
