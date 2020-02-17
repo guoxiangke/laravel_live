@@ -80,17 +80,6 @@
    </div>
 </template>
 <style>
-  #tabs-with-content .tabs:not(:last-child) {
-    margin-bottom: 0;
-  }
-
-  #tabs-with-content .tab-content {
-    padding: 0 0 0 1rem;
-    display: none;
-  }
-  #tabs-with-content .tab-content.is-active {
-    display: block;
-  }
 </style>
 <script>
     export default {

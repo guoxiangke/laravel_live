@@ -47,9 +47,20 @@
 		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 	}
 
+	#tabs-with-content .tabs:not(:last-child) {
+		margin-bottom: 0;
+	}
+	#tabs-with-content .tab-content {
+		padding-left: 1rem;
+		display: none;
+	}
+	#tabs-with-content .tab-content.is-active {
+		display: block;
+	}
+
 	.scrollable{
 	    padding-top: 1rem;
-	    height: 55vh; 
+	    height: 50vh; 
 	    overflow-y: scroll;
 	}
 	.scroll-down{
