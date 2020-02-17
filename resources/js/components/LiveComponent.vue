@@ -33,8 +33,21 @@
                     </div>
                   </div>
                 </div>
-              <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }}</div>
-            </div>
+                <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }}</div>
+              </div>
+              
+      
+              <div class="intercom-conversation-footer">
+                  <textarea
+                      id="intercom-textarea"
+                      @keydown="sendTypingEvent"
+                      @keyup.enter="sendMessage"
+                      v-model="newMessage"
+                      type="textarea"
+                      name="message"
+                      placeholder="发布消息..."></textarea>
+                  <button class="intercom-composer-send-button" @click="sendMessage"></button>
+              </div>
           </div>
         </section>
 
@@ -63,18 +76,6 @@
           </div>
         </section>
       </div>
-    </div>
-      
-    <div class="intercom-conversation-footer">
-        <textarea
-            id="intercom-textarea"
-            @keydown="sendTypingEvent"
-            @keyup.enter="sendMessage"
-            v-model="newMessage"
-            type="textarea"
-            name="message"
-            placeholder="发布消息..."></textarea>
-        <button class="intercom-composer-send-button" @click="sendMessage"></button>
     </div>
 
    </div>
