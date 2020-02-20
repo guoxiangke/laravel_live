@@ -1,0 +1,30 @@
+{
+	"SocialiteProviders\\Manager\\OAuth2\\User": {
+		"accessTokenResponseBody": {
+			"access_token": "30_bSvwfi_0DAtzAEZqDq_du88jnr3V1TBRZ_cxG6TztRLCCidyWcBWV3eAcx6EY4b4dKeHGZr42T_RlVOw03kRliwnHXdkwBidAzIhdF5jbK8",
+			"expires_in": 7200,
+			"refresh_token": "30_BeeaaPOJa3ZgSoz7SKQo08jZE5td70fznFOg_vrmBMyIc6WC4HM9yAB0nBvwL5QsbJVbsk6WRLx-oY5iCGwstLWTbx87guuH0m5fGiLWJvw",
+			"openid": "oTjEws-8eAAUqgR4q_ns7pbd0zN8",
+			"scope": "snsapi_userinfo"
+		},
+		"token": "30_bSvwfi_0DAtzAEZqDq_du88jnr3V1TBRZ_cxG6TztRLCCidyWcBWV3eAcx6EY4b4dKeHGZr42T_RlVOw03kRliwnHXdkwBidAzIhdF5jbK8",
+		"refreshToken": "30_BeeaaPOJa3ZgSoz7SKQo08jZE5td70fznFOg_vrmBMyIc6WC4HM9yAB0nBvwL5QsbJVbsk6WRLx-oY5iCGwstLWTbx87guuH0m5fGiLWJvw",
+		"expiresIn": 7200,
+		"id": "oTjEws-8eAAUqgR4q_ns7pbd0zN8",
+		"nickname": "永不止息-小永",
+		"name": null,
+		"email": null,
+		"avatar": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKr5EdqRL0wqFejrTfpZvSEDksdRP8kWblgKAyyBmgkfhLr89bondA2GRjy0ZKlVuY5lQv6rs8b5g/132",
+		"user": {
+			"openid": "oTjEws-8eAAUqgR4q_ns7pbd0zN8",
+			"nickname": "永不止息-小永",
+			"sex": 1,
+			"language": "zh_CN",
+			"city": "",
+			"province": "",
+			"country": "中国",
+			"headimgurl": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKr5EdqRL0wqFejrTfpZvSEDksdRP8kWblgKAyyBmgkfhLr89bondA2GRjy0ZKlVuY5lQv6rs8b5g/132",
+			"privilege": []
+		}
+	}
+}

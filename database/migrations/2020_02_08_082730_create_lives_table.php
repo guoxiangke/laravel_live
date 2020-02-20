@@ -18,7 +18,8 @@ class CreateLivesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id')->comment('owner');
-            $table->unsignedBigInteger('rrule_id');
+            $table->timestamp('start_at')->nullable();//开始时间
+            $table->unsignedtinyInteger('during_minutes')->default(60); //持续时间
             $table->schemalessAttributes('extra_attributes');
             $table->timestamps();
             $table->softDeletes();

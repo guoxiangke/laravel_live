@@ -13,7 +13,7 @@
         <ul>
         <li><a>互动消息</a></li>
         <li><a>图文介绍</a></li>
-        <li><a>在线成员</a></li>
+        <li><a>当前在线</a></li>
         </ul>
       </div>
       <div class="tab-contents">
@@ -33,7 +33,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }}</div>
+                <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }} &nbsp;&nbsp; 11:11</div>
               </div>
               
       
@@ -69,7 +69,7 @@
               <div class="column is-narrow" v-for="(user, index) in users" :key="index">
                 <div class="chat-profile">
                   <img class="chat-avatar" v-if="user.socials" :src="user.socials[0]?user.socials[0].avatar:'/image/default.avatar.png'"  alt="">
-                  <p>{{ user.name }}</p>
+                  <p class="size-ex-small">{{ user.name }}</p>
                 </div>
               </div>
             </div>

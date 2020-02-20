@@ -6,6 +6,34 @@
 			- 小组密码/暗号
 		4.微信自动登录，获取头像、昵称等
 # todo
+	Album/Course
+		groupable!
+	聊天
+		语音？
+		@mention？
+		踢人！!!
+	创建群组聊天
+		1.手机号、姓名、profile 认证！
+		2.创建1个/10元/月，100/年
+		live from => to
+		rrule =》 active_at //直播时段、开启聊天，其他时间，禁止聊天！
+	Live 群组
+		只有会员能加入Live小组！
+		会员申请加入，approve！
+			need approve?!
+			审核会员！
+				是否需要填入会员信息，字段？
+			群组成员！
+			og_member
+			OgMembership
+				isGroup
+				isGroupContent
+			一个文章属于 某个组
+			一个用户是某个组的memeber
+			memberable	groupable
+			post_id/user_id  group_id/live_id,
+		申请加入
+		price
 	user
 		login with telephone!
 	role
@@ -257,12 +285,21 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 ## 经验/bug
 	### laravel Broadcaster config中的pusher和Pusher Channels的区别！ https://pusher.com/channels
 	### tinker中生成测试数据
+		$user = factory(\App\User::class, 1)->create()->first();
+		$live = factory(\App\Models\Live::class, 1)->create()->first();
+		
+		$og = factory(\App\Models\OrganicGroup::class, 1)->create()->first();
+		$og = New \App\Models\OrganicGroup
+		$live = $live->members()->save($user);
 		factory(\App\Models\Message::class, 1)->create() # tinker必须要第一个
+		
 		\App\Models\Live::create(['title' => "测试live",'description' => "Hello，直播聊天时，这里可以是一个图文结束，todo：开始时间/结束时间",'user_id' => 1,'rrule_id' => 1,]);
 		\App\User::create(['name'=>'admin','email'=>'admin@admin.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
 		\App\User::create(['name'=>'test','email'=>'test@test.com','password'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','email_verified_at' => now(),]);
 		mysql
 			update users set password="$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+		// Cacade delete through a polymorphic relationship
+                // https://laracasts.com/discuss/channels/laravel/cacade-delete-through-a-polymorphic-relationship
 	### 直播 model & Route::resource('lives', 'LiveController');  bug！
 		lives的单数 ==》life了！
 		live 改为 chats或
@@ -323,3 +360,14 @@ npm install @inertiajs/inertia @inertiajs/inertia-vue @babel/plugin-syntax-dynam
 	### iphone 输入框 键盘 隐藏
 		https://segmentfault.com/q/1010000008281411/a-1020000008282334
 		https://www.jotform.com/answers/1582331-iOS-Input-doesn-t-loose-focus-if-button-is-clicked-outside-of-iframe
+	### Create Laravel Eloquent model without a primary key (Example)
+		protected $primaryKey = null;
+		public $incrementing = false;
+	### 多对多 morphMany
+		OrganicGroup
+			App\Traits\Memberable;
+			App\Traits\Groupable;
+		//向小组添加用户
+		$live->members()->create(['memberable_type'=>"App\User",'memberable_id'=>2])
+		//用户加入小组
+		$user->groups()->create(['groupable_type'=>"App\Models\Live",'groupable_id'=>1])

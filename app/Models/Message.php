@@ -7,18 +7,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 // use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\HasSchemalessAttributes;
 use App\User;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Message extends Model
+class Message extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    use HasMediaTrait; // voice_id
     // use LogsActivity;
     // protected static $logAttributes = ['*'];
     // protected static $logAttributesToIgnore = [ 'none'];
     // protected static $logOnlyDirty = true;
     
     use HasSchemalessAttributes;
-    const EXTRA_ATTRIBUTES = ['to','do'];
+    const EXTRA_ATTRIBUTES = ['mention_uid', 'reply_mid', 'action_emoji', 'is_rollback'];
     public $casts = [
         'extra_attributes' => 'array',
     ];

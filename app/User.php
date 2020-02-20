@@ -9,17 +9,17 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Traits\HasSchemalessAttributes;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 use App\Models\Message;
 use App\Models\Social;
+use App\Models\OrganicGroup;
+use App\Traits\OrganicGroup\Memberable;
 
 class User extends Authenticatable
 {
     use SoftDeletes;
     use Notifiable;
     use HasRoles;
-    use HasMediaTrait;//附件
 
     use LogsActivity;
     protected static $logAttributes = ['*'];
@@ -73,6 +73,22 @@ class User extends Authenticatable
         return $this->hasMany(Social::class);
     }
 
+    // Memberable begin
+    // use App\Models\OrganicGroup;
+    // use App\Traits\OrganicGroup\Memberable;
+    use Memberable; 
+    // $user->is_memberable = ture;
+    //$user->groups() // 获取我所属的小组！
 
-
+    // 如果删除一个User，因为User是Memberable，需要删除OG表中所有与该用户有关的关items
+    // 定义数据库约束不行，因为 表/memberable_type 不确定是User还是Post！
+    protected static function boot() {
+        parent::boot();
+        static::deleting(function($model) {
+            OrganicGroup::where('memberable_type', self::CLASS)
+                ->where('memberable_id', $model->id)
+                ->delete();
+        });
+    }
+    // Memberable end
 }

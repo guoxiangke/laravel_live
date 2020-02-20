@@ -165,8 +165,11 @@
 		padding-left: 40px;
 		clear: both;
 		color: #a8b6c2;
-		font-size: 12px;
+		font-size: 10px;
 		padding-top: 5px;
+	}
+	.size-ex-small {
+		font-size: 11px;
 	}
 
 	.intercom-avatar{

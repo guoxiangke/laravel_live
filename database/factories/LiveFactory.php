@@ -3,7 +3,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\User;
 use App\Models\Live;
-use App\Models\Rrule;
 use Faker\Generator as Faker;
 
 $factory->define(Live::class, function (Faker $faker) {
@@ -14,9 +13,7 @@ $factory->define(Live::class, function (Faker $faker) {
             return factory(User::class)
                 ->create()->id;
         },
-        'rrule_id' => function () {
-            return factory(Rrule::class)
-                ->create()->id;
-        },
+        'start_at' => now(), //开始时间
+        'during_minutes'=> $faker->randomNumber(2),//120
     ];
 });
