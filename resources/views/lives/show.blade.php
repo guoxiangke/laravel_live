@@ -217,9 +217,16 @@
 		color: gray;
 		font-size: 12px;
 	}
+	.tab-title{
+		font-size: 13px;
+	}
 	.li.right{
 		padding-right: 1em;
 		max-width: 80%;
+	}
+	.tabs.is-centered ul{
+		padding: 0 2em;
+		justify-content: space-between;
 	}
 </style>
 @endsection

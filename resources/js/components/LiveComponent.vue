@@ -10,7 +10,7 @@
 
     <div id="tabs-with-content">
       <div class="tabs is-centered">
-        <ul>
+        <ul class="tab-title">
         <li><a>互动消息</a></li>
         <li><a>图文介绍</a></li>
         <li><a>当前在线</a></li>
@@ -33,7 +33,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }} &nbsp;&nbsp; 11:11</div>
+                <div class="intercom-conversation-part-metadata">{{ message.user.socials[0]?message.user.socials[0].name: message.user.name }} &nbsp;&nbsp; {{ message.created_at.substr(5,11) }}</div>
               </div>
               
       
