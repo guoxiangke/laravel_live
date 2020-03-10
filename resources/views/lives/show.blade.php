@@ -220,7 +220,7 @@
 		color: gray;
 		font-size: 10px;
 		position: fixed;
-	    bottom: 30em;
+	    bottom: 20em;
 	    right: 2em;
 	}
 	.statics div{

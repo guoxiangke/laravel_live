@@ -2,7 +2,7 @@
    <div class="liveComponent">
     <div class="container">
         <div class="statics">
-          <div class="button is-primary is-small"><i class="fas fa-users"></i>{{ users.length }}</div>
+          <div class="button is-info is-outlined is-small"><i class="fas fa-users"></i>{{ users.length }}</div>
           <div class="button is-info is-small"><i class="fas fa-eye"></i>{{ viewed }}</div>
         </div>
     </div>
