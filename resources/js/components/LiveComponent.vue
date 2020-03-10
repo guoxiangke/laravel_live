@@ -1,10 +1,9 @@
 <template>
    <div class="liveComponent">
-    <div class="container has-text-centered">
+    <div class="container">
         <div class="statics">
-          <span>在线人数：<strong>{{ users.length }}</strong></span>
-          &nbsp;&nbsp;
-          <span>浏览次数：<strong>{{ viewed }}</strong></span>
+          <div class="button is-primary is-small"><i class="fas fa-users"></i>{{ users.length }}</div>
+          <div class="button is-info is-small"><i class="fas fa-eye"></i>{{ viewed }}</div>
         </div>
     </div>
 

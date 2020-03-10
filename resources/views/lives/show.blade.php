@@ -170,6 +170,8 @@
 	}
 	.size-ex-small {
 		font-size: 11px;
+		height: 1.5em;
+    	overflow: hidden;
 	}
 
 	.intercom-avatar{
@@ -213,9 +215,22 @@
 		color: #fff;
 		background-color: #1F8CEB;
 	}
+
 	.statics{
 		color: gray;
-		font-size: 12px;
+		font-size: 10px;
+		position: fixed;
+	    bottom: 30em;
+	    right: 2em;
+	}
+	.statics div{
+		display: block;
+		margin-bottom: 1em;
+		text-align: left;
+		padding: 5px 8px;
+	}
+	.statics div i{
+		margin-right: .2em;
 	}
 	.tab-title{
 		font-size: 13px;
