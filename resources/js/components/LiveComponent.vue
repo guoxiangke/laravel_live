@@ -95,6 +95,11 @@
             }
         },
         mounted: function () {
+            $('#setIframeHeight').click(function(){
+              let obj = document.getElementById('iframe');
+              obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+              $(this).hide();
+            })
             $('#intercom-textarea').blur(function(){
               $('.intercom-conversation-footer').css('position','fixed');
             });

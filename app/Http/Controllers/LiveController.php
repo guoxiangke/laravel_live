@@ -61,13 +61,19 @@ class LiveController extends Controller
         $user = Auth::user()->load('socials');
         $live->load('messages.user.socials');
 
-        $isLive = $request->query('live')?:$live->is_live;
+        $isLive = $request->query('live');//$live->is_live;
         $vid = $request->query('vid')?:date('Ymd');
         $preset = $request->query('preset')?:3;
-        // $domain = "https://lss.test/index.html";
-        $domain = "https://livelss.cdn.bcebos.com/index.html";
-        $live->m3u = $domain."?stream=classroom&vid=" . $vid .  "&preset=L" . $preset . '&live=' .  $isLive;
-        
+        $hls = $request->query('hls')?:0;
+        if($hls) {
+            $domain = "/hls/index.html";
+            // $domain = "https://livelss.cdn.bcebos.com/index.html";
+        }else{
+            $domain= '/rtmp/index.html';
+        }
+        // dd($domain);
+        $live->hls = $hls;
+        $live->m3u = $domain."?stream=classroom&vid=" . $vid .  "&preset=L" . $preset . '&live=' .  $isLive. '&hls=' .  $hls;
         activity()
            ->causedBy($user)
            ->performedOn($live)
