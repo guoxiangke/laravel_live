@@ -65,13 +65,12 @@ class LiveController extends Controller
         $vid = $request->query('vid')?:date('Ymd');
         $preset = $request->query('preset')?:3;
         $hls = $request->query('hls')?:0;
-        if($hls) {
-            $domain = "/hls/index.html";
-            // $domain = "https://livelss.cdn.bcebos.com/index.html";
-        }else{
-            $domain= '/rtmp/index.html';
-        }
-        // dd($domain);
+        $domain = "https://livelss.cdn.bcebos.com/index.html";
+        // if($hls) {
+        //     $domain = "/hls/index.html";
+        // }else{
+        //     $domain= '/rtmp/index.html';
+        // }
         $live->hls = $hls;
         $live->m3u = $domain."?stream=classroom&vid=" . $vid .  "&preset=L" . $preset . '&live=' .  $isLive. '&hls=' .  $hls;
         activity()

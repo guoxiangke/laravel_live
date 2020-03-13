@@ -3,14 +3,7 @@
 @section('content')
 <div class="main-content">
 	<div class="video">
-		<iframe src="{{$live->m3u}}" frameborder="0" width="100%" id="iframe"></iframe>
-        @if(!$live->hls)
-        <div id="setIframeHeight">
-        	<span class="button is-info is-outlined is-small">
-        		<i class="fas fa-expand-arrows-alt"></i>&nbsp;&nbsp;先点击播放按钮，再点此自适应高度
-        	</span>
-        </div>
-        @endif
+		<iframe src="{{$live->m3u}}" frameborder="0" width="100%" height="200px" id="iframe"></iframe>
 	</div>
     <live :user="{{ $user }}" :live="{{ $live }}" :viewed="{{ $viewed }}"></live>
 </div>
@@ -249,7 +242,7 @@
 		padding: 0 2em;
 		justify-content: space-between;
 	}
-	
+
 	#setIframeHeight{
 		margin: 0 auto;
      	width: 100px; 
