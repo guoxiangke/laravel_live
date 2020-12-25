@@ -63,16 +63,10 @@ class LiveController extends Controller
 
         $isLive = $request->query('live');//$live->is_live;
         $vid = $request->query('vid')?:date('Ymd');
-        $preset = $request->query('preset')?:3;
-        $hls = $request->query('hls')?:0;
-        $domain = "https://livelss.cdn.bcebos.com/index.html";
-        // if($hls) {
-        //     $domain = "/hls/index.html";
-        // }else{
-        //     $domain= '/rtmp/index.html';
-        // }
+        $stream = $request->query('stream')?:'live';
+        $domain = "https://l.abc-chinaedu.com/live/index.html";
         $live->hls = $hls;
-        $live->m3u = $domain."?stream=classroom&vid=" . $vid .  "&preset=L" . $preset . '&live=' .  $isLive. '&hls=' .  $hls;
+        $live->m3u = $domain."?stream=". $stream ."&vid=" . $vid  . '&live=' .  $isLive;
         activity()
            ->causedBy($user)
            ->performedOn($live)
