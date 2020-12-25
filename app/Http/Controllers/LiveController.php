@@ -65,7 +65,7 @@ class LiveController extends Controller
         $vid = $request->query('vid')?:date('Ymd');
         $stream = $request->query('stream')?:'live';
         $domain = "https://l.abc-chinaedu.com/live/index.html";
-        $live->hls = $hls;
+        // $live->hls = $hls;
         $live->m3u = $domain."?stream=". $stream ."&vid=" . $vid  . '&live=' .  $isLive;
         activity()
            ->causedBy($user)
