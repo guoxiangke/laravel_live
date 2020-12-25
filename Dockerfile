@@ -2,7 +2,7 @@
 # PHP Dependencies
 # https://laravel-news.com/multi-stage-docker-builds-for-laravel
 #
-FROM composer:latest as vendor
+FROM composer:1 as vendor
 
 COPY database/ database/
 
@@ -36,29 +36,18 @@ RUN npm install && npm run production
 #
 # Application
 #
-FROM drupal:8-fpm
+FROM drupal:8.9-apache
 # https://hub.docker.com/_/drupal
 
-# install the PHP extensions  pcntl & cron
+# install the PHP extensions  pcntl
 RUN set -ex; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     vim \
-    libwebp-dev \
-    libjpeg62-turbo-dev \
-    libxpm-dev \
-    libmcrypt-dev \
-    libfreetype6-dev \
-    libmcrypt-dev \
-  ; \
-  \
-  docker-php-ext-configure gd \
-    --with-png-dir=/usr \
-    --with-jpeg-dir=/usr \
-    --with-freetype-dir=/usr/include/freetype2 \
+    libonig-dev\
+    ffmpeg \
   ; \
   docker-php-ext-install -j "$(nproc)" \
-    gd \
     mbstring \
     pcntl \
     bcmath \
@@ -75,9 +64,15 @@ COPY --from=frontend /app/public/css/ /var/www/html/public/css/
 COPY --from=frontend /app/mix-manifest.json /var/www/html/mix-manifest.json
 
 COPY docker/start.sh /usr/local/bin/start
+WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data storage bootstrap/cache \
   && chmod -R ug+rwx storage bootstrap/cache \
   && chmod u+x /usr/local/bin/start
+
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public/
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 CMD ["/usr/local/bin/start"]

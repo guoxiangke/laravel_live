@@ -11,6 +11,8 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - 8001:80
     environment:
       CONTAINER_ROLE: app
       REDIS_PORT: 6379
@@ -19,30 +21,19 @@ services:
       QUEUE_DRIVER: redis
       REDIS_HOST: redis
     volumes:
-      - code:/var/www/html/
-      - .env:/var/www/html/.env
       - ./docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-      - ./storage/app:/var/www/html/storage/app
-      - "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
-    network_mode: "bridge"
+      # - "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
 
-  # Nginx Service
-  nginx:
-    image: nginx:latest
-    container_name: live-webserver
-    restart: unless-stopped
-    volumes:
-      - code:/var/www/html/
+      # - .:/var/www/html/
       - .env:/var/www/html/.env
-      - ./docker/nginx/conf.d/app.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./storage/app:/var/www/html/storage/app:ro
-    environment:
-      VIRTUAL_HOST: ${VIRTUAL_HOST}
-      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
-      LETSENCRYPT_EMAIL: ${MAIL_USERNAME}
+      - public:/var/www/html/public
+      # - ./public:/var/www/html/public ## for FE develop in local.
+      - ./app:/var/www/html/app
+      - ./config:/var/www/html/config
+      - ./resources:/var/www/html/resources
+      - ./routes:/var/www/html/routes
+      - ./storage/app:/var/www/html/storage/app
     network_mode: "bridge"
-    links:
-      - app
 
   #MySQL Service
   db:
@@ -72,6 +63,11 @@ services:
       - redis
     network_mode: "bridge"
     volumes:
+      - ./app:/var/www/html/app
+      - ./config:/var/www/html/config
+      - ./resources:/var/www/html/resources
+      - ./routes:/var/www/html/routes
+
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
     environment:
@@ -91,6 +87,11 @@ services:
       - redis
     network_mode: "bridge"
     volumes:
+      - ./app:/var/www/html/app
+      - ./config:/var/www/html/config
+      - ./resources:/var/www/html/resources
+      - ./routes:/var/www/html/routes
+
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
     environment:
@@ -112,9 +113,15 @@ services:
       - redis
     network_mode: "bridge"
     volumes:
+      - ./app:/var/www/html/app
+      - ./config:/var/www/html/config
+      - ./resources:/var/www/html/resources
+      - ./routes:/var/www/html/routes
+      
       - ./storage/app:/var/www/html/storage/app
       - .env:/var/www/html/.env
-      - "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
+      #- "/var/www/html/docker-nginx-https/config/nginx/certs:/etc/nginx/certs"
+      - "/root/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory:/etc/nginx/certs"
     environment:
       REDIS_PORT: 6379
       CONTAINER_ROLE: websockets
@@ -125,4 +132,4 @@ services:
 
 volumes:
   db_data:
-  code:
+  public:
