@@ -58,18 +58,16 @@
 			};
 			var vid = getUrlParameter('vid');
 			var stream = getUrlParameter('stream');
+
 			var preset = getUrlParameter('preset');
 			var live = getUrlParameter('live');
 			// https://livelss.cdn.bcebos.com/index.html?stream=classroom&vid=20200202&preset=L3&live=0
-			// https://hls.yongbuzhixi.com/ybzx/classroom/202002-L3.m3u8
-			let preHls = "https://hls.yongbuzhixi.com/ybzx/" + stream + "/" + vid;
-			let hls4 = preHls+"-"+preset+".m3u8";
-			// let hls3 = preHls+"-L3.m3u8";
-			// let hls2 = preHls+"-L2.m3u8";
-			// let hls1 = preHls+"-L1.m3u8";
+			// var cdn = "https://cdn.live.abc-chinaedu.com/"
+			var cdn = "https://pull.yongbuzhixi.com/"
+			let hls4 = cdn + stream + "/" + vid + ".m3u8";
+
 			hls = live==1 ? hls4 : 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8';
 			document.getElementsByTagName("source")[0].setAttribute("src", hls);
-
 			// Optionally override HTML native playback, usually required for Android devices, but not for iOS.
 			// videojs.options.hls.overrideNative = true;
 			// videojs.options.html5.nativeAudioTracks = false;
